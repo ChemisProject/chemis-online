@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Chemis App
 ==========
 
@@ -30,3 +31,9 @@ Dixon's test, metrology, etc.
 This app can be freely compiled and shared and also can be 
 >>>>>>> 0ae606d8a4b9462e54659f7e43a880f5155dbd0d
 found in launchpad for Ubuntu in a few days.
+=======
+chemis-project
+==============
+
+A chemistry's tool app
+>>>>>>> c896111c9ce5bb466f34a3602f60690e42894b8d
