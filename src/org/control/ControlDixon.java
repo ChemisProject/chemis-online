@@ -49,14 +49,14 @@ public class ControlDixon {
     
     //change formules...
     private double getUpperEnd3_7(ArrayList<Double> values){
-        return (values.get(2)-values.get(0))/(values.get(values.size()-3)-values.get(0));
+        return (values.get(values.size()-1)-values.get(values.size()-2))/(values.get(values.size()-1)-values.get(0));
     }
     
     private double getUpperEnd8_12(ArrayList<Double> values){
-        return (values.get(2)-values.get(0))/(values.get(values.size()-3)-values.get(0));
+        return (values.get(values.size()-1)-values.get(values.size()-2))/(values.get(values.size()-1)-values.get(1));
     }
     
     private double getUpperEnd13(ArrayList<Double> values){
-        return (values.get(2)-values.get(0))/(values.get(values.size()-3)-values.get(0));
+        return (values.get(values.size()-1)-values.get(values.size()-3))/(values.get(values.size()-1)-values.get(2));
     }
 }
