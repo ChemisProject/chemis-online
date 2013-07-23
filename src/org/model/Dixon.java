@@ -11,26 +11,57 @@ import java.util.ArrayList;
  * @author guilherme
  */
 public class Dixon {
-    
-    private ArrayList<Double> values=null; //list of values to test
-    
-    
-    public Dixon(){
+
+    private ArrayList<Double> values = null; //list of values to test
+
+    public Dixon() {
     }
-    
-    public Dixon(ArrayList<Double> values){
-        this.values=values;
+
+    public Dixon(ArrayList<Double> values) {
+        this.values = values;
     }
-    
-    public void addValue(double value){
+
+    public void addValue(double value) {
         this.values.add(value);
     }
-    
-    public void removeValue(int index){
+
+    public void removeValue(int index) {
         this.values.remove(index);
     }
-    
-    public void removeValue(Double value){
+
+    public void removeValue(Double value) {
         this.values.remove(value);
+    }
+
+    public Double getValue(int index) {
+        return values.get(index);
+    }
+
+    public Double getFirstValue() {
+        return values.get(0);
+    }
+
+    public void removeFisrtValue() {
+        if (!values.isEmpty()) {
+            values.remove(0);
+        }
+    }
+
+    public Double getLastValue() {
+        return values.get(values.size() - 1);
+    }
+
+    public void removeLastValue() {
+        if (!values.isEmpty()) {
+            values.remove(values.size() - 1);
+        }
+    }
+    
+    public ArrayList<Double> getValues(){
+        return values;
+    }
+    
+    public int getN(){
+        return values.size();
     }
 }

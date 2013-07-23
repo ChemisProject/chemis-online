@@ -12,13 +12,14 @@ import java.util.Map;
  *
  * @author guilherme
  */
-public class ConstantsDixon {
+public class DixonConstants {
 
+    /*Key= percentage_n */
     public static final Map<String, Double> REPETITIONS_CONSTANTS;
 
     static {
         Map<String, Double> map = new HashMap<>();
-
+        
         //95% constants
         map.put("95_3", 0.970);
         map.put("95_4", 0.829);
