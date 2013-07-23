@@ -14,6 +14,7 @@ public class Dixon {
     
     private ArrayList<Double> values=null; //list of values to test
     
+    
     public Dixon(){
     }
     

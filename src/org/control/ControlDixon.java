@@ -35,6 +35,7 @@ public class ControlDixon {
         Collections.sort(values);
     }
     
+    //lower end functions
     private double getLowerEnd3_7(ArrayList<Double> values){
         return (values.get(1)-values.get(0))/(values.get(values.size()-1)-values.get(0));
     }
@@ -47,7 +48,7 @@ public class ControlDixon {
         return (values.get(2)-values.get(0))/(values.get(values.size()-3)-values.get(0));
     }
     
-    //change formules...
+    //Upper end functions
     private double getUpperEnd3_7(ArrayList<Double> values){
         return (values.get(values.size()-1)-values.get(values.size()-2))/(values.get(values.size()-1)-values.get(0));
     }
