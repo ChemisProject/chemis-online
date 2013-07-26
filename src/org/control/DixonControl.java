@@ -6,6 +6,7 @@ package org.control;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import org.model.Dixon;
 import org.model.DixonConstants;
 import org.model.DixonException;
@@ -34,12 +35,14 @@ public class DixonControl {
         return instance;
     }
 
-    public void calc(Dixon dixon, boolean sortValues) throws DixonException {
-        //sort list of values
-        if (sortValues) {
-            sortValues(dixon.getValues());
-        }
+    public Double[] calc(Dixon dixon, int percent) throws DixonException {
+        removeDuplicates(dixon);
+        sortValues(dixon);
+        Double[] results = new Double[2];
+        return calc(dixon, results, percent);
+    }
 
+    private Double[] calc(Dixon dixon, Double[] results, int percent) throws DixonException {
         //initialize results
         double lowerEnd = 0;
         double upperEnd = 0;
@@ -53,21 +56,42 @@ public class DixonControl {
         } else if (dixon.getN() >= 8 && dixon.getN() <= 12) {
             lowerEnd = getLowerEnd8_12(dixon.getValues());
             upperEnd = getUpperEnd8_12(dixon.getValues());
-        } else if (dixon.getN()>=13){
-            lowerEnd=getLowerEnd13(dixon.getValues());
-            upperEnd=getUpperEnd13(dixon.getValues());
+        } else if (dixon.getN() >= 13) {
+            lowerEnd = getLowerEnd13(dixon.getValues());
+            upperEnd = getUpperEnd13(dixon.getValues());
         }
-        
-        
+
+        //test if lower ends and upper ends are approved
+        if (approved(lowerEnd, percent, dixon)) {
+            results[0] = lowerEnd;
+        } else {
+            dixon.removeFisrtValue();
+            results[0] = calc(dixon, results, percent)[0];
+        }
+
+        if (approved(upperEnd, percent, dixon)) {
+            results[1] = upperEnd;
+        } else {
+            dixon.removeLastValue();
+            results[1] = calc(dixon, results, percent)[1];
+        }
+
+        return results;
     }
 
     //continuar aqui! Resolver lógica aprovação
-    private boolean approved(double value,int percent){
-        return (value== DixonConstants.REPETITIONS_CONSTANTS.get(""));
+    private boolean approved(double value, int percent, Dixon dixon) {
+        return (value < DixonConstants.REPETITIONS_CONSTANTS.get("" + percent + "_" + dixon.getN()));
     }
-    
-    public void sortValues(ArrayList<Double> values) {
-        Collections.sort(values);
+
+    public void sortValues(Dixon dixon) {
+        Collections.sort(dixon.getValues());
+    }
+
+    public void removeDuplicates(Dixon dixon) {
+        HashSet<Double> hs = new HashSet<>(dixon.getValues());
+        dixon.clear();
+        dixon.getValues().addAll(hs);
     }
 
     //lower end functions
