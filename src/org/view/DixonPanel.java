@@ -4,19 +4,39 @@
  */
 package org.view;
 
+import java.awt.TextField;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JTextField;
+
 /**
  *
  * @author guilherme
  */
 public class DixonPanel extends javax.swing.JPanel {
 
+    
+    private BoxLayout boxLayout;
+    private static int fields=0;
+    
     /**
      * Creates new form DixonPanel
      */
     public DixonPanel() {
         initComponents();
+        boxLayout=new BoxLayout(this,BoxLayout.PAGE_AXIS);
+        createField();
     }
 
+    private void createField(){
+        fields++;
+        add("valueField"+fields,new TextField("0.00"));
+    }
+    
+    private void removeField(int index){
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +50,11 @@ public class DixonPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,6 +7,8 @@ package org.control;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.model.Dixon;
+import org.view.ChemisFrame;
+import org.view.DixonPanel;
 
 /**
  *
@@ -18,8 +20,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ChemisFrame cf=new ChemisFrame();
+        cf.add(new DixonPanel());
+        cf.setVisible(true);
+        
         //System.out.println("Chemis Initialized: Nothing to run yet...");
-        DecimalFormat df=new DecimalFormat("####0.0000");
+        /*DecimalFormat df=new DecimalFormat("####0.0000");
         NumberFormat nf=NumberFormat.getInstance();
         nf.setMaximumFractionDigits(4);
         nf.setMinimumFractionDigits(4);
