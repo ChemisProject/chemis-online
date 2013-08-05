@@ -4,20 +4,48 @@
  */
 package org.view;
 
+import java.awt.CardLayout;
+import java.util.HashMap;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author guilherme
  */
 public class ChemisFrame extends javax.swing.JFrame {
 
+    private CardLayout cardLayout=new CardLayout();
+    private BoxLayout layoutLeftBar;
+    private HashMap<String,JPanel> modules=new HashMap<>();
+    
     /**
      * Creates new form ChemisFrame
      */
     public ChemisFrame() {
         initComponents();
         setTitle("Chemis");
+        
+        //initialize leftBar layout
+        layoutLeftBar=new BoxLayout(panelLeftBar,BoxLayout.PAGE_AXIS);
+        
+        panelCentral.setLayout(cardLayout);
+        openModule(new DixonPanel(),"dixon");
+        cardLayout.show(panelCentral,"dixon");
+    }
+    
+    private void openModule(JPanel panel,String name){
+        if(!modules.containsKey(name)){
+            modules.put(name, panel);
+            panelCentral.add(name,panel);
+        }
+        cardLayout.show(panelCentral,name);
     }
 
+    private boolean isModuleOpen(String name){
+        return modules.containsKey(name);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,11 +56,9 @@ public class ChemisFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         panelLeftBar = new javax.swing.JPanel();
+        panelCentral = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,22 +72,22 @@ public class ChemisFrame extends javax.swing.JFrame {
         );
         panelLeftBarLayout.setVerticalGroup(
             panelLeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 456, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
+        panelCentral.setLayout(panelCentralLayout);
+        panelCentralLayout.setHorizontalGroup(
+            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 780, Short.MAX_VALUE)
+        );
+        panelCentralLayout.setVerticalGroup(
+            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        jMenu3.setText("Menu");
-        jMenu1.add(jMenu3);
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem1.setText("Teste");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menuAbout.setText("About");
+        jMenuBar1.add(menuAbout);
 
         setJMenuBar(jMenuBar1);
 
@@ -71,22 +97,22 @@ public class ChemisFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelLeftBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 774, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelLeftBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu menuAbout;
+    private javax.swing.JPanel panelCentral;
     private javax.swing.JPanel panelLeftBar;
     // End of variables declaration//GEN-END:variables
 }
