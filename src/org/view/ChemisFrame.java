@@ -8,7 +8,6 @@ import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import org.view.components.ChemisSideBar;
 import java.awt.CardLayout;
 import java.util.HashMap;
-import java.util.Properties;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.model.ChemisTools;
@@ -39,13 +38,22 @@ public class ChemisFrame extends javax.swing.JFrame {
         setSize(600,400);
         setIconImage(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png").getImage());
         
+        panelCentral.setLayout(cardLayout);
+        
         add(chemisSideBar);
         add(panelCentral);
         
-        panelCentral.setLayout(cardLayout);
         openModule(new DixonPanel(),"dixon");
-        cardLayout.show(panelCentral,"dixon");
     }
+    
+    /**
+     * Open a JPanel in the component panelCentral.
+     * This method also tests if the given module is already saved in cache, 
+     * saving memory.
+     * 
+     * @param panel
+     * @param name 
+     */
     
     private void openModule(JPanel panel,String name){
         if(!modules.containsKey(name)){
@@ -55,6 +63,13 @@ public class ChemisFrame extends javax.swing.JFrame {
         cardLayout.show(panelCentral,name);
     }
 
+    /**Test if a JPanel of a Chemis' module is already in the cache,
+     * returning <code>true</code> if the opened and <code>false</code> if 
+     * not running yet.
+     * 
+     * @param name
+     * @return 
+     */
     private boolean isModuleOpen(String name){
         return modules.containsKey(name);
     }
