@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.view;
+package org.view.components;
 
 import java.awt.Color;
 import java.awt.Dimension;

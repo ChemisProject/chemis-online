@@ -2,19 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.view;
+package org.view.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 /**
@@ -32,9 +25,12 @@ public class ChemisSideBar extends javax.swing.JPanel {
         initComponents();
         layoutBox=new BoxLayout(this,BoxLayout.PAGE_AXIS);
         setLayout(layoutBox);
-        setBorder(new MatteBorder(0,0,0,1, Color.black));
+        //#563d7c
+        //#291C3E
+        setBorder(new MatteBorder(0,0,0,1,new Color(0x29,0x1c,0x3e)));
     }
 
+    /*
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -49,7 +45,7 @@ public class ChemisSideBar extends javax.swing.JPanel {
         GradientPaint gp = new GradientPaint(10, 0, color1, w, 0, color2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
-    }
+    }*/
 
     public void addLauncher(ChemisLauncher chemisLauncher){
         add(Box.createRigidArea(rigidAreaDimension));
@@ -64,7 +60,8 @@ public class ChemisSideBar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(217, 87, 190));
+        setBackground(new java.awt.Color(86, 61, 124));
+        setForeground(new java.awt.Color(254, 254, 254));
         setMaximumSize(new java.awt.Dimension(80, 32767));
         setMinimumSize(new java.awt.Dimension(80, 240));
         setPreferredSize(new java.awt.Dimension(80, 300));

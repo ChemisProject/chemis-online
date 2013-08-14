@@ -4,10 +4,14 @@
  */
 package org.view;
 
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import org.view.components.ChemisSideBar;
 import java.awt.CardLayout;
 import java.util.HashMap;
-import javax.swing.BoxLayout;
+import java.util.Properties;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import org.model.ChemisTools;
 
 /**
  *
@@ -16,18 +20,27 @@ import javax.swing.JPanel;
 public class ChemisFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout=new CardLayout();
-    private BoxLayout layoutLeftBar;
+    private JPanel panelCentral=new JPanel();
+    private ChemisSideBar chemisSideBar=new ChemisSideBar();
     private HashMap<String,JPanel> modules=new HashMap<>();
     
     /**
      * Creates new form ChemisFrame
      */
     public ChemisFrame() {
+        try{
+            UIManager.setLookAndFeel(new GTKLookAndFeel());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
         initComponents();
         setTitle("Chemis");
+        setSize(600,400);
+        setIconImage(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png").getImage());
         
-        //initialize leftBar layout
-        layoutLeftBar=new BoxLayout(panelLeftBar,BoxLayout.PAGE_AXIS);
+        add(chemisSideBar);
+        add(panelCentral);
         
         panelCentral.setLayout(cardLayout);
         openModule(new DixonPanel(),"dixon");
@@ -55,56 +68,16 @@ public class ChemisFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelLeftBar = new javax.swing.JPanel();
-        panelCentral = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        panelLeftBar.setBackground(new java.awt.Color(185, 69, 170));
-
-        javax.swing.GroupLayout panelLeftBarLayout = new javax.swing.GroupLayout(panelLeftBar);
-        panelLeftBar.setLayout(panelLeftBarLayout);
-        panelLeftBarLayout.setHorizontalGroup(
-            panelLeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
-        );
-        panelLeftBarLayout.setVerticalGroup(
-            panelLeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
-        panelCentral.setLayout(panelCentralLayout);
-        panelCentralLayout.setHorizontalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
-        );
-        panelCentralLayout.setVerticalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         menuAbout.setText("About");
         jMenuBar1.add(menuAbout);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelLeftBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelLeftBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,7 +85,5 @@ public class ChemisFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuAbout;
-    private javax.swing.JPanel panelCentral;
-    private javax.swing.JPanel panelLeftBar;
     // End of variables declaration//GEN-END:variables
 }

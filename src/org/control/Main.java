@@ -9,7 +9,6 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.view.ChemisFrame;
-import org.view.DixonPanel;
 
 /**
  *
@@ -27,9 +26,7 @@ public class Main {
         } catch (UnsupportedLookAndFeelException ex) {
             
         }
-        
         ChemisFrame cf = new ChemisFrame();
-        cf.add(new DixonPanel());
         cf.setVisible(true);
 
         //System.out.println("Chemis Initialized: Nothing to run yet...");
