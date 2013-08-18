@@ -14,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -33,33 +34,25 @@ public class DixonPanel extends javax.swing.JPanel {
     private GridBagConstraints gbc;
     private BoxLayout boxLayoutPanelValues;
     private FlowLayout flowLayoutBottomPanel;
-    private JPanel panelBottom, panelValues, panelResults;
     //default dimensions of components
     private Dimension dimensionField = new Dimension(200, 30);
     private Dimension dimensionDeleteButton = new Dimension(30, 30);
     private Dimension maxDimensionRowPanel = new Dimension(500, 36);
     private static ArrayList<JTextField> fields = new ArrayList<>();
-    private JButton buttomCalc, buttomClear;
+    private JButton buttonCalc, buttonClear, buttonAdd;
+    private JPanel panelBottom, panelValues, panelResults;
     private Insets insetsButtons = new Insets(0, 5, 0, 5);
-    private ActionListener listenerButtonDelete = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JButton buttonDelete = (JButton) e.getSource();
-
-            if (fields.size() > 3) {
-                removeRow(buttonDelete.getParent());
-            } else {
-                System.out.println("Minimo 3 linhas");
-            }
-
-        }
-    };
-
+    
+    //listeners
+    private ActionListener genericActionListener;
+    private FocusListener genericFocusListener;
     /**
      * Creates new form DixonPanel
      */
     public DixonPanel() {
+        initListeners();
         initComponents();
+        
     }
 
     private void createField() {
@@ -68,8 +61,9 @@ public class DixonPanel extends javax.swing.JPanel {
         fields.add(field);
 
         JButton buttonDelete = new JButton("-");
+        buttonDelete.setName("buttonDelete");
         buttonDelete.setPreferredSize(dimensionDeleteButton);
-        buttonDelete.addActionListener(listenerButtonDelete);
+        buttonDelete.addActionListener(genericActionListener);
 
         JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 2));
         rowPanel.setMaximumSize(maxDimensionRowPanel);
@@ -115,18 +109,55 @@ public class DixonPanel extends javax.swing.JPanel {
         String text95;
         try {
             Double[] result95 = DixonControl.getInstance().calc(dixon95, 95);
-            text95=String.format("Test 95%: Approved!\nLower end: %d\nUpper end: %d\nRemoved values:",result95[0],result95[1]);
-            
-            for(Double val:result95){
-                text95=text95.concat("\n"+val);
+            text95 = String.format("Test 95%: Approved!\nLower end: %d\nUpper end: %d\nRemoved values:", result95[0], result95[1]);
+
+            for (Double val : dixon95.getRemoved()) {
+                text95 = text95.concat("\n" + val);
             }
         } catch (DixonException e) {
-            text95="Test 95%: reproved!";
+            System.out.println(e.getMessage());
+            text95 = "Test 95%: reproved!";
         }
-        
-        JOptionPane.showMessageDialog(null,text95);
+
+        String text99;
+        try {
+            Double[] result99 = DixonControl.getInstance().calc(dixon99, 99);
+            text99 = String.format("Test 99%: Approved!\nLower end: %d\nUpper end: %d\nRemoved values:", result99[0], result99[1]);
+
+            for (Double val : result99) {
+                text99 = text99.concat("\n" + val);
+            }
+        } catch (DixonException e) {
+            text99 = "Test 99%: reproved!";
+        }
+
+        JOptionPane.showMessageDialog(null, text95 + "\n" + text99);
     }
 
+    private void buttonDeleteActionListener(ActionEvent e) {
+        JButton button = (JButton) e.getSource();
+
+        if (fields.size() > 3) {
+            removeRow(button.getParent());
+        } else {
+            System.out.println("Minimo 3 linhas");
+        }
+    }
+
+    private void buttonClearActionListener(ActionEvent e) {
+        for (JTextField field : fields) {
+            field.setText("0.00");
+        }
+    }
+
+    private void buttonCalcActionListener(ActionEvent e) {
+        showResults();
+    }
+
+    private void buttonAddFieldActionListener(ActionEvent e){
+        createField();
+    }
+    
     private void initComponents() {
         //init layouts
         flowLayoutBottomPanel = new FlowLayout(FlowLayout.LEFT, 5, 5);
@@ -175,23 +206,58 @@ public class DixonPanel extends javax.swing.JPanel {
         add(panelBottom, gbc);
 
         //init panel bottom
-        buttomCalc = new JButton("Calc");
-        buttomCalc.setMargin(insetsButtons);
-        buttomClear = new JButton("Clear fields");
-        buttomClear.setMargin(insetsButtons);
-        panelBottom.add(buttomCalc);
-        panelBottom.add(buttomClear);
+        buttonCalc = new JButton("Calc");
+        buttonCalc.setName("buttonCalc");
+        buttonCalc.setMargin(insetsButtons);
+        buttonCalc.addActionListener(genericActionListener);
+
+        buttonClear = new JButton("Clear fields");
+        buttonClear.setName("buttonClear");
+        buttonClear.setMargin(insetsButtons);
+        buttonClear.addActionListener(genericActionListener);
+
+        buttonAdd = new JButton("Add field");
+        buttonAdd.setName("buttonAdd");
+        buttonAdd.setMargin(insetsButtons);
+        buttonAdd.addActionListener(genericActionListener);
+
+        panelBottom.add(buttonCalc);
+        panelBottom.add(buttonClear);
 
         //init components panelValues
-        createField();
-        createField();
-        createField();
-        createField();
+        JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 2));
+        rowPanel.setMaximumSize(maxDimensionRowPanel);
+        rowPanel.setBackground(Color.CYAN);
+        rowPanel.setName("rowPanelFunctions");
+
+        rowPanel.add(buttonAdd);
+        panelValues.add(rowPanel);
+
+        //create minimum number of fields 
         createField();
         createField();
         createField();
 
         //init components panelResults
         //panelResults.set
+    }
+
+    private void initListeners() {
+        genericActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Component component = (Component) e.getSource();
+
+                if (component.getName().equals("buttonDelete")) {
+                    buttonDeleteActionListener(e);
+                } else if (component.getName().equals("buttonClear")) {
+                    buttonClearActionListener(e);
+                } else if (component.getName().equals("buttonCalc")) {
+                    buttonCalcActionListener(e);
+                } else if (component.getName().equals("buttonAdd")){
+                    buttonAddFieldActionListener(e);
+                }
+            }
+        };
     }
 }
