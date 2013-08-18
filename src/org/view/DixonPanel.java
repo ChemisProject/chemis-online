@@ -5,19 +5,20 @@
 package org.view;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 /**
  *
@@ -40,6 +41,15 @@ public class DixonPanel extends javax.swing.JPanel {
     private JButton buttomCalc,buttomClear;
     private Insets insetsButtons=new Insets(0,5,0,5);
     
+    private ActionListener listenerButtonDelete=new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton buttonDelete= (JButton) e.getSource();
+            System.out.println(buttonDelete.getParent().getName());
+            removeRow(buttonDelete.getParent());
+        }
+    };
+    
     /**
      * Creates new form DixonPanel
      */
@@ -48,25 +58,42 @@ public class DixonPanel extends javax.swing.JPanel {
     }
 
     private void createField() {
-        JPanel rowPanel=new JPanel(new FlowLayout(FlowLayout.LEFT,5,2));
         JTextField field=new JTextField("0.00");
-        JButton button=new JButton("-");
-        button.setPreferredSize(dimensionDeleteButton);
-        
-        rowPanel.setMaximumSize(maxDimensionRowPanel);
-        rowPanel.setBackground(Color.CYAN);
-        
         field.setPreferredSize(dimensionField);
         fields.add(field);
         
+        JButton buttonDelete=new JButton("-");
+        buttonDelete.setPreferredSize(dimensionDeleteButton);
+        buttonDelete.addActionListener(listenerButtonDelete);
+        
+        JPanel rowPanel=new JPanel(new FlowLayout(FlowLayout.LEFT,5,2));
+        rowPanel.setMaximumSize(maxDimensionRowPanel);
+        rowPanel.setBackground(Color.CYAN);
+        rowPanel.setName("rowPanel");
+        
         rowPanel.add(fields.get(fields.size()-1));
-        rowPanel.add(button);
+        rowPanel.add(buttonDelete);
         panelValues.add(rowPanel);
     }
-
-    private void removeField(int index) {
+    
+    private void removeRow(Component rowPanel){
+        int rowIndex=0;
+        Container parentContainer=rowPanel.getParent();
+        
+        for(Component c: parentContainer.getComponents()){
+            if(c.getName().equals("rowPanel")){
+                if(c.equals(rowPanel)){
+                    fields.remove(rowIndex);
+                    break;
+                }
+                rowIndex++;
+            }
+        }
+        parentContainer.remove(rowPanel);
+        parentContainer.validate();
+        parentContainer.repaint();
     }
-
+    
     private void initComponents() {
         //init layouts
         flowLayoutBottomPanel = new FlowLayout(FlowLayout.LEFT, 5, 5);
@@ -127,4 +154,6 @@ public class DixonPanel extends javax.swing.JPanel {
         createField();
         createField();
     }
+    
+    
 }
