@@ -10,13 +10,14 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.TextField;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
@@ -26,13 +27,19 @@ public class DixonPanel extends javax.swing.JPanel {
 
     private GridBagConstraints gbc;
     private BoxLayout boxLayoutPanelValues;
-    private GroupLayout groupLayoutPanelValues;
     private FlowLayout flowLayoutBottomPanel;
     private JPanel panelBottom,panelValues,panelResults;
+    
+    //default dimensions of components
+    private Dimension dimensionField=new Dimension(200,30);
+    private Dimension dimensionDeleteButton=new Dimension(30,30);
+    private Dimension maxDimensionRowPanel=new Dimension(500,36);
+    
     private static ArrayList<JTextField> fields = new ArrayList<>();
     
     private JButton buttomCalc,buttomClear;
     private Insets insetsButtons=new Insets(0,5,0,5);
+    
     /**
      * Creates new form DixonPanel
      */
@@ -41,8 +48,20 @@ public class DixonPanel extends javax.swing.JPanel {
     }
 
     private void createField() {
-
-        add("valueField" + 1, new TextField("0.00"));
+        JPanel rowPanel=new JPanel(new FlowLayout(FlowLayout.LEFT,5,2));
+        JTextField field=new JTextField("0.00");
+        JButton button=new JButton("-");
+        button.setPreferredSize(dimensionDeleteButton);
+        
+        rowPanel.setMaximumSize(maxDimensionRowPanel);
+        rowPanel.setBackground(Color.CYAN);
+        
+        field.setPreferredSize(dimensionField);
+        fields.add(field);
+        
+        rowPanel.add(fields.get(fields.size()-1));
+        rowPanel.add(button);
+        panelValues.add(rowPanel);
     }
 
     private void removeField(int index) {
@@ -57,10 +76,11 @@ public class DixonPanel extends javax.swing.JPanel {
         panelBottom = new JPanel(flowLayoutBottomPanel);
         panelBottom.setMinimumSize(new Dimension(400,40));
         panelBottom.setPreferredSize(new Dimension(400,40));
-        panelBottom.setBackground(Color.red);
+        //panelBottom.setBackground(Color.red);
         
-        panelValues =new JPanel(boxLayoutPanelValues);
-        boxLayoutPanelValues = new BoxLayout(panelValues, BoxLayout.PAGE_AXIS);
+        panelValues =new JPanel();
+        boxLayoutPanelValues = new BoxLayout(panelValues, BoxLayout.Y_AXIS);
+        panelValues.setLayout(boxLayoutPanelValues);
         panelValues.setPreferredSize(new Dimension(300,400));
         panelValues.setBackground(Color.GREEN);
         
@@ -102,5 +122,9 @@ public class DixonPanel extends javax.swing.JPanel {
         panelBottom.add(buttomCalc);
         panelBottom.add(buttomClear);
         
+        //init components panelValues
+        createField();
+        createField();
+        createField();
     }
 }
