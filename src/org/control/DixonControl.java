@@ -35,6 +35,19 @@ public class DixonControl {
         return instance;
     }
 
+    /**Calculates Dixon's test, according to the given percentage. Returns an
+     * array of Double with 2 positions:
+     * array[0]=lower end
+     * array[1]=upper end
+     * 
+     * If not approved, throws a DixonException
+     * 
+     * @param dixon
+     * @param results
+     * @param percent
+     * @return 
+     * @throws DixonException 
+     */
     public Double[] calc(Dixon dixon, int percent) throws DixonException {
         removeDuplicates(dixon);
         sortValues(dixon);

@@ -35,7 +35,7 @@ public class ChemisFrame extends javax.swing.JFrame {
         
         initComponents();
         setTitle("Chemis");
-        setSize(600,400);
+        setSize(700,500);
         setIconImage(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png").getImage());
         
         panelCentral.setLayout(cardLayout);
