@@ -5,9 +5,11 @@
 package org.control;
 
 import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.model.ChemisToolsModel;
 import org.view.ChemisFrame;
 
 /**
@@ -24,11 +26,15 @@ public class Main {
         try {
             UIManager.setLookAndFeel(laf);
         } catch (UnsupportedLookAndFeelException ex) {
-            
         }
-        ChemisFrame cf = new ChemisFrame();
-        cf.setVisible(true);
 
+        try {
+            ChemisFrame cf = new ChemisFrame();
+            cf.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+            Logger.getLogger("general_log").info(ex.getMessage());
+        }
         //System.out.println("Chemis Initialized: Nothing to run yet...");
         /*DecimalFormat df=new DecimalFormat("####0.0000");
          NumberFormat nf=NumberFormat.getInstance();

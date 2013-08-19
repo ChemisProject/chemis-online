@@ -8,7 +8,7 @@ package org.control;
  *
  * @author guilherme
  */
-public class ChemisTools {
+public class ChemisToolsControl {
 
     public static final int B = 1;
     public static final int KB = 1024;

@@ -10,7 +10,7 @@ import java.awt.CardLayout;
 import java.util.HashMap;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import org.model.ChemisTools;
+import org.model.ChemisToolsModel;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ChemisFrame extends javax.swing.JFrame {
         initComponents();
         setTitle("Chemis");
         setSize(700,500);
-        setIconImage(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png").getImage());
+        setIconImage(ChemisToolsModel.getInstance().getImage("/org/view/icons/chemis-icon.png").getImage());
         
         panelCentral.setLayout(cardLayout);
         

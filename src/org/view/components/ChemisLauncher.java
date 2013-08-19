@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
-import org.model.ChemisTools;
+import org.model.ChemisToolsModel;
 
 /**
  *
@@ -24,13 +24,13 @@ public class ChemisLauncher extends JLabel{
     public ChemisLauncher(){
         super();
         setText("Launcher");
-        setIcon(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png"));
+        setIcon(ChemisToolsModel.getInstance().getImage("/org/view/icons/chemis-icon.png"));
         initComponents();
     }
     
     public ChemisLauncher(String text){
         super(text);
-        setIcon(ChemisTools.getInstance().getImage("/org/view/icons/chemis-icon.png"));
+        setIcon(ChemisToolsModel.getInstance().getImage("/org/view/icons/chemis-icon.png"));
         initComponents();
     }
     
