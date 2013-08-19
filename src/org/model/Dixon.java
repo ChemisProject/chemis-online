@@ -22,9 +22,8 @@ public class Dixon {
     }
 
     public Dixon(ArrayList<Double> values) {
-        values=new ArrayList<>();
+        this.values=new ArrayList<>(values);
         removed=new ArrayList<>();
-        this.values = values;
     }
 
     public void addValue(double value) {

@@ -4,12 +4,10 @@
  */
 package org.view;
 
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 import org.view.components.ChemisSideBar;
 import java.awt.CardLayout;
 import java.util.HashMap;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import org.model.ChemisToolsModel;
 
 /**
@@ -27,11 +25,6 @@ public class ChemisFrame extends javax.swing.JFrame {
      * Creates new form ChemisFrame
      */
     public ChemisFrame() {
-        try{
-            UIManager.setLookAndFeel(new GTKLookAndFeel());
-        }catch(Exception e){
-            e.printStackTrace();
-        }
         
         initComponents();
         setTitle("Chemis");

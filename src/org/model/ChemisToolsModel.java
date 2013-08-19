@@ -8,12 +8,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import javax.swing.ImageIcon;
@@ -26,7 +27,6 @@ public class ChemisToolsModel {
 
     private static ChemisToolsModel instance;
     private HashMap<String, ImageIcon> images;
-    private Logger logger;
     private FileHandler fileHandler = null;
     private SimpleFormatter formatter = new SimpleFormatter();
 
@@ -82,16 +82,21 @@ public class ChemisToolsModel {
         return ChemisToolsModel.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
 
-    public FileHandler getLogFileHandler(){
-        if(fileHandler==null){
+    public FileHandler getLogFileHandler() {
+        if (fileHandler == null) {
             try {
-                fileHandler=new FileHandler(System.getProperty("user.home") + "/log_chemis.log", 1024 * 1024, 1, true);
-            } catch (Exception ex) {
+                fileHandler = new FileHandler(System.getProperty("user.home") + "/log_chemis.log", 1024 * 1024, 1, true);
+            } catch (IOException | SecurityException ex) {
                 System.out.println(ex.getMessage());
             }
             fileHandler.setFormatter(formatter);
         }
         return fileHandler;
     }
-    
+
+    public String exceptionToString(Throwable tr) {
+        StringWriter errors = new StringWriter();
+        tr.printStackTrace(new PrintWriter(errors));
+        return errors.toString();
+    }
 }

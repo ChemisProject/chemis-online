@@ -4,7 +4,6 @@
  */
 package org.view;
 
-import com.sun.java.swing.plaf.gtk.GTKColorType;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -13,14 +12,11 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
-import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import org.control.DixonControl;
+import org.model.ChemisToolsModel;
 import org.model.Dixon;
 import org.model.DixonException;
 
@@ -58,7 +55,7 @@ public class DixonPanel extends javax.swing.JPanel {
     private ActionListener genericActionListener;
     private FocusListener genericFocusListener;
     //components
-    private JLabel resultLabel=new JLabel("Result:");
+    private JLabel resultLabel = new JLabel("Result:");
     //arrays
     private static ArrayList<JTextField> fields = new ArrayList<>();
 
@@ -114,6 +111,7 @@ public class DixonPanel extends javax.swing.JPanel {
     private ArrayList<Double> getValues() throws NumberFormatException {
         ArrayList<Double> values = new ArrayList<>();
         for (JTextField field : fields) {
+            System.out.println(Double.parseDouble(field.getText()));
             values.add(Double.parseDouble(field.getText()));
         }
         return values;
@@ -124,10 +122,10 @@ public class DixonPanel extends javax.swing.JPanel {
         Dixon dixon95 = new Dixon(getValues());
         Dixon dixon99 = new Dixon(getValues());
 
-        String text95;
+        String text95 = "Error- Check log file";
         try {
             Double[] result95 = DixonControl.getInstance().calc(dixon95, 95);
-            text95 = String.format("Test 95%: Approved!\nLower end: %d\nUpper end: %d\nRemoved values:", result95[0], result95[1]);
+            text95 = "Test 95%: Approved!\nLower end: "+result95[0]+"\nUpper end: "+result95[1]+"\nRemoved values:";
 
             for (Double val : dixon95.getRemoved()) {
                 text95 = text95.concat("\n" + val);
@@ -135,18 +133,24 @@ public class DixonPanel extends javax.swing.JPanel {
         } catch (DixonException e) {
             System.out.println(e.getMessage());
             text95 = "Test 95%: reproved!";
+        } catch (Exception ex) {
+            Logger.getLogger("DixonPanel").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+            Logger.getLogger("DixonPanel").info(ChemisToolsModel.getInstance().exceptionToString(ex));
         }
 
-        String text99;
+        String text99 = "Error- Check log file";
         try {
             Double[] result99 = DixonControl.getInstance().calc(dixon99, 99);
-            text99 = String.format("Test 99%: Approved!\nLower end: %d\nUpper end: %d\nRemoved values:", result99[0], result99[1]);
+            text99 = "Test 99%: Approved!\nLower end: "+result99[0]+"\nUpper end: "+result99[1]+"\nRemoved values:";
 
             for (Double val : result99) {
                 text99 = text99.concat("\n" + val);
             }
         } catch (DixonException e) {
             text99 = "Test 99%: reproved!";
+        } catch (Exception ex) {
+            Logger.getLogger("DixonPanel").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+            Logger.getLogger("DixonPanel").info(ChemisToolsModel.getInstance().exceptionToString(ex));
         }
 
         JOptionPane.showMessageDialog(null, text95 + "\n" + text99);
@@ -186,13 +190,13 @@ public class DixonPanel extends javax.swing.JPanel {
         panelBottom.setMinimumSize(new Dimension(400, 40));
         panelBottom.setPreferredSize(new Dimension(400, 40));
         //panelBottom.setBackground(Color.red);
-        
-        boxValues=new Box(BoxLayout.Y_AXIS);
-        
-        scrollPaneValues=new JScrollPane(boxValues);
-        scrollPaneValues.getViewport().setBackground(Color.decode(""+getBackground().getRGB()));
+
+        boxValues = new Box(BoxLayout.Y_AXIS);
+
+        scrollPaneValues = new JScrollPane(boxValues);
+        scrollPaneValues.getViewport().setBackground(Color.decode("" + getBackground().getRGB()));
         scrollPaneValues.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        
+
         panelResults = new JPanel();
         panelResults.setPreferredSize(new Dimension(300, 400));
 
@@ -254,11 +258,11 @@ public class DixonPanel extends javax.swing.JPanel {
         createField();
         createField();
         createField();
-        
+
         //init components panelResults
-        resultLabel.setPreferredSize(new Dimension(300,600));
+        resultLabel.setPreferredSize(new Dimension(300, 600));
         panelResults.add(resultLabel);
-        
+
     }
 
     private void initListeners() {
