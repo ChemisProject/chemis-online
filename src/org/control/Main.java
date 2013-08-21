@@ -41,8 +41,9 @@ public class Main {
             cf.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
-            Logger.getLogger("general_log").info(ex.getMessage());
+            Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
         }
+        
         /*
          DecimalFormat df = new DecimalFormat("####0.0000");
          NumberFormat nf = NumberFormat.getInstance();
