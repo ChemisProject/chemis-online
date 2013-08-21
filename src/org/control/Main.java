@@ -4,11 +4,9 @@
  */
 package org.control;
 
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import org.model.ChemisToolsModel;
 import org.view.ChemisFrame;
 
@@ -24,13 +22,15 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            UIManager.setLookAndFeel(new GTKLookAndFeel());
-        } catch (UnsupportedLookAndFeelException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Windows user... :( hahaha");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+        } catch (Exception ex) {
+            Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+            Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
             try {
-                UIManager.setLookAndFeel(new WindowsLookAndFeel());
-            } catch (UnsupportedLookAndFeelException ex1) {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            } catch (Exception ex1) {
+                Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+                Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
                 System.out.println(ex1.getMessage() + "\nAre you using Mac?");
 
             }
@@ -43,7 +43,8 @@ public class Main {
             Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
             Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
         }
-        
+
+
         /*
          DecimalFormat df = new DecimalFormat("####0.0000");
          NumberFormat nf = NumberFormat.getInstance();
@@ -55,7 +56,7 @@ public class Main {
          dixon.addValue(0.1128);
          dixon.addValue(0.1145);
          dixon.addValue(0.1152);
-         //dixon.addValue(0.1152);
+         dixon.addValue(0.1152);
          dixon.addValue(0.1158);
          dixon.addValue(0.1158);
          dixon.addValue(0.1166);
@@ -68,7 +69,7 @@ public class Main {
 
 
          try {
-         Double[] results = DixonControl.getInstance().calc(dixon, 95);
+         Double[] results = DixonControl.getInstance().calc(dixon, 99);
          System.out.println("EI: " + df.format(results[0]) + "\nES: " + df.format(results[1]) + "\nN: " + dixon.getN());
 
          System.out.println("Removidos: ");

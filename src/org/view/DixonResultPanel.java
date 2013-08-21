@@ -32,10 +32,14 @@ public class DixonResultPanel extends javax.swing.JPanel {
     }
 
     public String removedsToList(ArrayList<Double> removeds) {
-        String text = "---";
+        String text = "";
 
-        for (Double d : removeds) {
-            text=text.concat(df.format(d)+"<br>");
+        if (removeds.isEmpty()) {
+            text="---";
+        } else {
+            for (Double d : removeds) {
+                text = text.concat(df.format(d) + "<br>");
+            }
         }
         return text;
     }
@@ -46,7 +50,7 @@ public class DixonResultPanel extends javax.swing.JPanel {
             labelResultLower.setText(df.format(lower));
             labelResultUpper.setText(df.format(upper));
             labelResultN.setText("" + n);
-            labelResultRemoved.setText("<html>"+removedsToList(removed)+"</html>");
+            labelResultRemoved.setText("<html>" + removedsToList(removed) + "</html>");
         } else {
             resetFields();
             labelResultResult.setText("<html><div style='color:#E20705;'>Reproved</div></html>");
@@ -151,12 +155,10 @@ public class DixonResultPanel extends javax.swing.JPanel {
                     .addComponent(labelN)
                     .addComponent(labelResultN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelRemovedValues)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(labelResultRemoved, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelRemovedValues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelResultRemoved, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

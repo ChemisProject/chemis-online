@@ -118,7 +118,6 @@ public class DixonPanel extends javax.swing.JPanel {
     private ArrayList<Double> getValues() throws NumberFormatException {
         ArrayList<Double> values = new ArrayList<>();
         for (JTextField field : fields) {
-            System.out.println(Double.parseDouble(field.getText()));
             values.add(Double.parseDouble(field.getText()));
         }
         return values;
@@ -205,13 +204,14 @@ public class DixonPanel extends javax.swing.JPanel {
         scrollPaneValues.getViewport().setBackground(Color.decode("" + getBackground().getRGB()));
 
         scrollPaneValues.getVerticalScrollBar().setUnitIncrement(20);
-        scrollPaneValues.setMinimumSize(new Dimension(100, 500));
+        scrollPaneValues.setMaximumSize(new Dimension(200,1000));
         scrollPaneValues.getHorizontalScrollBar().setUnitIncrement(20);
 
         boxResults = new Box(BoxLayout.Y_AXIS);
 
         scrollPaneResults = new JScrollPane(boxResults);
         scrollPaneResults.getViewport().setBackground(Color.decode("" + getBackground().getRGB()));
+        scrollPaneResults.setPreferredSize(new Dimension(200,300));
         scrollPaneResults.getVerticalScrollBar().setUnitIncrement(20);
         scrollPaneResults.getHorizontalScrollBar().setUnitIncrement(20);
 
