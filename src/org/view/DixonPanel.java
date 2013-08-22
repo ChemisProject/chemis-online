@@ -16,18 +16,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import org.control.ChemisToolsControl;
 import org.control.DixonControl;
 import org.model.ChemisToolsModel;
@@ -42,14 +40,13 @@ public class DixonPanel extends javax.swing.JPanel {
 
     //layouts
     private GridBagConstraints gbc;
-    private BoxLayout boxLayoutPanelValues;
+    
     private FlowLayout flowLayoutBottomPanel;
-    private GroupLayout groupLayoutPanel95, groupLayoutPanel99;
     //default dimensions of components
     private Dimension dimensionField = new Dimension(200, 30);
-    private Dimension dimensionDeleteButton = new Dimension(30, 30);
+    private Dimension dimensionDeleteButton = new Dimension(36, 30);
     private Dimension maxDimensionRowPanel = new Dimension(500, 36);
-    private Insets insetsButtons = new Insets(0, 5, 0, 5);
+    private Insets insets = new Insets(0, 3, 0, 3);
     //containers
     private JButton buttonCalc, buttonClear, buttonAdd;
     private JPanel panelBottom;
@@ -59,12 +56,10 @@ public class DixonPanel extends javax.swing.JPanel {
     //listeners
     private ActionListener genericActionListener;
     private FocusListener genericFocusListener;
+    
     //arrays
     private static ArrayList<JTextField> fields = new ArrayList<>();
 
-    /**
-     * Creates new form DixonPanel
-     */
     public DixonPanel() {
         initListeners();
         initComponents();
@@ -73,13 +68,16 @@ public class DixonPanel extends javax.swing.JPanel {
 
     private void createField() {
         JTextField field = new JTextField("0.0000");
-        field.setPreferredSize(dimensionField);
-        field.addFocusListener(genericFocusListener);
         field.setName("fieldValue");
+        field.setPreferredSize(dimensionField);
+        field.setMargin(insets);
+        field.addFocusListener(genericFocusListener);
+        
         fields.add(field);
 
         JButton buttonDelete = new JButton("-");
         buttonDelete.setName("buttonDelete");
+        buttonDelete.setMargin(new Insets(0,0,0,0));
         buttonDelete.setPreferredSize(dimensionDeleteButton);
         buttonDelete.addActionListener(genericActionListener);
 
@@ -181,6 +179,26 @@ public class DixonPanel extends javax.swing.JPanel {
     private void buttonAddFieldActionListener(ActionEvent e) {
         createField();
     }
+    
+    private void fieldValueKeyListener(KeyEvent e){
+        JTextField field=(JTextField) e.getSource();
+        
+        int index=fields.indexOf(field);
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_UP:{
+                if(index>0){
+                    fields.get(index-1).requestFocus();
+                }
+                break;
+            }
+            case KeyEvent.VK_DOWN:{
+                if(index<fields.size()-1){
+                    fields.get(index+1).requestFocus();
+                }
+                break;
+            }
+        }
+    }
 
     private void fieldSelectAllFocusListener(FocusEvent e) {
         JTextField field = (JTextField) e.getSource();
@@ -190,7 +208,7 @@ public class DixonPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         //init layouts
-        flowLayoutBottomPanel = new FlowLayout(FlowLayout.LEFT, 5, 5);
+        flowLayoutBottomPanel = new FlowLayout(FlowLayout.LEFT, 5,3);
         gbc = new GridBagConstraints();
 
         //init panels
@@ -252,18 +270,23 @@ public class DixonPanel extends javax.swing.JPanel {
         //init panel bottom
         buttonCalc = new JButton("Calculate");
         buttonCalc.setName("buttonCalc");
-        buttonCalc.setMargin(insetsButtons);
+        buttonCalc.setMargin(insets);
+        buttonCalc.setPreferredSize(new Dimension(100,30));
         buttonCalc.addActionListener(genericActionListener);
 
-        buttonClear = new JButton("Clear fields");
+        buttonClear = new JButton("Clear all");
         buttonClear.setName("buttonClear");
-        buttonClear.setMargin(insetsButtons);
+        buttonClear.setMargin(insets);
+        buttonClear.setPreferredSize(new Dimension(100,30));
+        
         buttonClear.addActionListener(genericActionListener);
 
         buttonAdd = new JButton("Add field");
         buttonAdd.setName("buttonAdd");
-        buttonAdd.setMargin(insetsButtons);
+        buttonAdd.setMargin(insets);
+        buttonAdd.setPreferredSize(new Dimension(100,30));
         buttonAdd.addActionListener(genericActionListener);
+        
 
         panelBottom.add(buttonCalc);
         panelBottom.add(buttonClear);
@@ -271,7 +294,6 @@ public class DixonPanel extends javax.swing.JPanel {
         //init components panelValues
         JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 2));
         rowPanel.setMaximumSize(maxDimensionRowPanel);
-        //rowPanel.setBackground(Color.CYAN);
         rowPanel.setName("rowPanelFunctions");
 
         rowPanel.add(buttonAdd);
@@ -320,5 +342,6 @@ public class DixonPanel extends javax.swing.JPanel {
             public void focusLost(FocusEvent e) {
             }
         };
+        
     }
 }

@@ -4,7 +4,6 @@
  */
 package org.control;
 
-import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import org.model.ChemisToolsModel;
@@ -22,12 +21,14 @@ public class Main {
     public static void main(String[] args) {
 
         try {
+            //UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
         } catch (Exception ex) {
             Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
             Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
             try {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             } catch (Exception ex1) {
                 Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
                 Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
