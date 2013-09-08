@@ -5,9 +5,9 @@
 package org.control;
 
 import java.util.logging.Logger;
-import javax.swing.UIManager;
 import org.model.ChemisToolsModel;
 import org.view.ChemisFrame;
+import org.view.laf.ChemisLookAndFeel;
 
 /**
  *
@@ -19,7 +19,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
+        try {
+            ChemisLookAndFeel.getInstance().loadAndSetLookAndFeel();
+        }catch (Exception ex) {
+            Logger.getLogger("general_log").addHandler(ChemisToolsModel.getInstance().getLogFileHandler());
+            Logger.getLogger("general_log").info(ChemisToolsModel.getInstance().exceptionToString(ex));
+        }
+        
+        /*
         try {
             //UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
@@ -35,7 +43,7 @@ public class Main {
                 System.out.println(ex1.getMessage() + "\nAre you using Mac?");
 
             }
-        }
+        }*/
 
         try {
             ChemisFrame cf = new ChemisFrame();
