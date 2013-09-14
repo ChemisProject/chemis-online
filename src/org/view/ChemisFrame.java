@@ -6,10 +6,13 @@ package org.view;
 
 import org.view.components.ChemisSideBar;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.util.HashMap;
+import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import org.model.ChemisToolsModel;
+import org.view.components.ChemisLauncher;
 
 /**
  *
@@ -22,7 +25,7 @@ public class ChemisFrame extends javax.swing.JFrame {
     private ChemisSideBar chemisSideBar=new ChemisSideBar();
     private JDialog dialogAbout=null;
     private HashMap<String,JPanel> modules=new HashMap<>();
-    
+    private static Dimension rigidAreaDimension=new Dimension(0,8);
     /**
      * Creates new form ChemisFrame
      */
@@ -39,6 +42,11 @@ public class ChemisFrame extends javax.swing.JFrame {
         add(chemisSideBar);
         add(panelCentral);
         
+        
+        chemisSideBar.addLauncher(new ChemisLauncher("Dixon",ChemisToolsModel.getInstance().getImage("/org/view/icons/dixon-icon.png")));
+        chemisSideBar.add(Box.createVerticalGlue());
+        chemisSideBar.addLauncher(new ChemisLauncher("Help",ChemisToolsModel.getInstance().getImage("/org/view/icons/help-icon.png")));
+        chemisSideBar.add(Box.createRigidArea(rigidAreaDimension));
         openModule(new DixonPanel(),"dixon");
     }
     

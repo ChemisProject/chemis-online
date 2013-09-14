@@ -17,30 +17,32 @@ import org.model.ChemisToolsModel;
  *
  * @author guilherme
  */
-public class ChemisLauncher extends JLabel{
-    
-    private static Dimension size=new Dimension(80,86);
-    
-    public ChemisLauncher(){
+public class ChemisLauncher extends JLabel {
+
+    private static Dimension size = new Dimension(80, 90);
+    private static MouseListener mouseListener = null;
+
+    public ChemisLauncher() {
         super();
         setText("Launcher");
         setIcon(ChemisToolsModel.getInstance().getImage("/org/view/icons/chemis-icon.png"));
         initComponents();
     }
-    
-    public ChemisLauncher(String text){
+
+    public ChemisLauncher(String text) {
         super(text);
         setIcon(ChemisToolsModel.getInstance().getImage("/org/view/icons/chemis-icon.png"));
         initComponents();
     }
-    
-    public ChemisLauncher(String text, Icon icon){
+
+    public ChemisLauncher(String text, Icon icon) {
         super(text);
         initComponents();
         setIcon(icon);
     }
-    
-    private void initComponents(){
+
+    private void initComponents() {
+        setForeground(new Color(0xCD, 0xBF, 0xE3));
         setHorizontalAlignment(JLabel.CENTER);
         setHorizontalTextPosition(JLabel.CENTER);
         setVerticalTextPosition(JLabel.BOTTOM);
@@ -48,31 +50,59 @@ public class ChemisLauncher extends JLabel{
         setMinimumSize(size);
         setMaximumSize(size);
         setPreferredSize(size);
+        setBorder(BorderFactory.createEmptyBorder(10,0,5,0));
         
-        addMouseListener(new MouseListener() {
 
-            @Override
-            public void mouseClicked(MouseEvent me) {}
+        if (mouseListener == null) {
+            mouseListener=new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    ((ChemisLauncher) me.getSource()).setActive();
+                }
 
-            @Override
-            public void mousePressed(MouseEvent me) {}
+                @Override
+                public void mousePressed(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseReleased(MouseEvent me) {}
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent me) {}
+                @Override
+                public void mouseEntered(MouseEvent me) {
+                    ((ChemisLauncher) me.getSource()).setHover();
+                }
 
-            @Override
-            public void mouseExited(MouseEvent me) {
-                setBorder(BorderFactory.createLineBorder(Color.blue));
-            }
-        });
+                @Override
+                public void mouseExited(MouseEvent me) {
+                    ((ChemisLauncher) me.getSource()).setDefault();
+                }
+            };
+        }
+
+        addMouseListener(mouseListener);
     }
     
-    public void setTarget(){
+    protected void setDefault() {
+        setOpaque(false);
+        repaint();
+    }
+
+    protected void setActive() {
+        setDefault();
+        //#9A69E8
+    }
+
+    protected void setHover() {
+        this.setOpaque(true);
+        this.setBackground(new Color(0x7a,0x53,0xb8));
+        repaint();
+    }
+
+    protected void setPressed(){
         
     }
     
-    
+    protected void setTarget() {
+    }
 }
