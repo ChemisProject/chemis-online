@@ -1,4 +1,63 @@
 @CHARSET "UTF-8";
-#menu-bar{
-	
+
+html, body{
+	margin: 0;
+	padding: 0;
+}
+
+#chemis-page{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #f5f5f5;
+}
+
+#chemis-menu-bar{
+	float: left;
+	width: 6em;
+	height: 100%;
+	background-color: #563D7C;
+}
+
+.chemis-menu-bar-top{
+	float: top;
+}
+
+.chemis-menu-bar-bottom{
+	float: bottom;
+}
+
+#chemis-vertical-menu{
+	height: 100%;
+	padding: 0.5em;
+	list-style: none;
+	margin: 0;
+}
+
+#chemis-main-panel{
+	width: 100%;
+	background: blue;
+}
+
+.chemis-menu-item{
+	width: 100%;
+	height: 5em;
+	margin-bottom: 0.5em;
+	background: #ccc;
+	border-radius: 0.5em;
+}
+
+#chemis-item-dixon{
+	background-image: none, url('../img/dixon-icon.svg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: #43CA33;
+}
+
+.chemis-menu-item:hover{
+	background-color: #DFDFDF!important;
+}
+
+.chemis-menu-item:active{
+	background-color: white!important;
 }
