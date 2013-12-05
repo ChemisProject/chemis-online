@@ -6,7 +6,7 @@
 <version>1.0</version>
 <publisher>guilherme</publisher>
 <url>chemis.org</url>
-<icon>default_app_logo.png</icon>
+<icon>img/chemis-logo-128.svg</icon>
 <copyright>2013 by guilherme</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>
