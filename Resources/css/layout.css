@@ -1,21 +1,85 @@
 @CHARSET "UTF-8";
 
+@font-face{
+	font-family: Colaborate-Thin;
+	src: url('Colaborate/ColabThi.ttf');
+}
+
+@font-face{
+	font-family: Colaborate-Light;
+	src: url('Colaborate/ColabLig.ttf');
+}
+
+@font-face{
+	font-family: Colaborate-Regular;
+	src: url('Colaborate/ColabReg.ttf');
+}
+
+@font-face{
+	font-family: Colaborate-Bold;
+	src: url('Colaborate/ColabBol.ttf');
+}
+
+@font-face{
+	font-family: Colaborate-Medium;
+	src: url('Colaborate/ColabMed.ttf');
+}
+
 html, body{
 	margin: 0;
 	padding: 0;
-}
-
-#chemis-page{
-	position: absolute;
-	width: 100%;
-	height: 100%;
 	background-color: #f5f5f5;
 }
 
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: Colaborate-Light;
+}
+
+.pure-form input:focus{
+    border: 1px solid #7e0080!important;
+}
+
+.pure-form-aligned .pure-control-group label{
+	width: 3em;
+}
+
+.pure-button{
+	
+	background-color: #A379A3;
+	color: white;
+	font-size: 0.8em;
+}
+
+.pure-button:hover{
+	background-color: #BE8EBF;
+}
+
+.pure-button:active{
+	background-color: #E5AAE6;
+}
+
+/*chemis*/
+#chemis-page{
+	padding-left: 6em;
+	left: 0;
+}
+
+.chemis-header{
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+}
+
 #chemis-menu-bar{
-	float: left;
+	position: fixed;
+	margin-left: -6em;
+	left: 6em;
 	width: 6em;
-	height: 100%;
+	bottom: 0;
+	top: 0;
 	background-color: #563D7C;
 }
 
@@ -29,14 +93,20 @@ html, body{
 
 #chemis-vertical-menu{
 	height: 100%;
-	padding: 0.5em;
 	list-style: none;
 	margin: 0;
 }
 
 #chemis-main-panel{
-	width: 100%;
-	background: blue;
+	
+}
+
+.chemis-panel{
+	padding: 0.5em;
+}
+
+.chemis-fill-parent{
+	
 }
 
 .chemis-menu-item{
@@ -44,20 +114,33 @@ html, body{
 	height: 5em;
 	margin-bottom: 0.5em;
 	background: #ccc;
-	border-radius: 0.5em;
+	border-radius: 0.2em;
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
 #chemis-item-dixon{
 	background-image: none, url('../img/dixon-icon.svg');
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
     background-color: #43CA33;
+}
+#chemis-item-help{
+	background-image: none, url('../img/help-icon.svg');
+    background-color: #33CAC2;
 }
 
 .chemis-menu-item:hover{
-	background-color: #DFDFDF!important;
+	background-color: #CACACA!important;
 }
 
 .chemis-menu-item:active{
-	background-color: white!important;
+	background-color: #E6E6E6!important;
+}
+
+/*Dixon*/
+#chemis-dixon-values{
+	
+}
+
+#chemis-dixon-results{
+	background-color: #D9D9D9;
 }
