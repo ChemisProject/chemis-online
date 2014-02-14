@@ -1,54 +1,196 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ChemisDesktop Alpha</title>
-<link rel="stylesheet" href="css/pure-min.css">
-<link rel="stylesheet" href="css/layout.css">
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/core.js"></script>
-</head>
-<body>
-	<div id="chemis-page" class="pure-g-r">
-		<div id="chemis-menu-bar" class="pure-u">
-			<div>
-				<div class="chemis-menu-bar-top">
-					<ul id="chemis-vertical-menu" class="chemis-panel">
-						<li id="chemis-item-dixon" class="chemis-menu-item"></li>
-						<li id="chemis-item-help" class="chemis-menu-item"></li>
-					</ul>
-				</div>
-			</div>
-		</div>
 
-		<div id="chemis-main-panel" class="pure-u-1">
-			<div class="pure-g-r">
-				<div id="chemis-dixon-values" class="pure-u-2-5">
-					<div class="chemis-panel">
-					<div class="pure-u-1 chemis-header" >
-						<h2>Values: 3</h2>
-					</div>
-						<div class="pure-form pure-form-aligned">
-							<div class="pure-control-group">
-								<label for="value-1">#1</label> <input id="value-1" type="text">
-								<button class="pure-button">x</button>
-							</div>
-							<div class="pure-control-group">
-								<label for="value-1">#2</label> <input id="value-2" type="text">
-								<button class="pure-button">x</button>
-							</div>
-							<div class="pure-control-group">
-								<label for="value-1">#3</label> <input id="value-3" type="text">
-								<button class="pure-button">x</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="chemis-dixon-results" class="pure-u-3-5">
-					<div class="chemis-panel">0</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ChemisDesktop Alpha</title>
+    <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/chemis-core.js"></script>
+    <script type="text/javascript" src="js/dixon-core.js"></script>
+</head>
+
+<body>
+    <div id="chemis-page" class="pure-g-r">
+        <div id="chemis-menu-bar" class="pure-u">
+            <div>
+                <div class="chemis-menu-bar-top">
+                    <ul id="chemis-vertical-menu" class="chemis-panel">
+                        <li id="chemis-item-dixon" class="chemis-menu-item"></li>
+                        <li id="chemis-item-help" class="chemis-menu-item"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="chemis-main-panel" class="pure-u-1">
+            <div class="pure-g-r">
+                <div id="chemis-dixon-values" class="pure-u-2-5">
+                    <div class="chemis-panel">
+                        <div class="pure-u-1 chemis-header">
+                            <h2 id="chemis-dixon-values-count">Values: 3</h2>
+                        </div>
+                        <ol id="chemis-dixon-values-list" class="pure-form pure-form-aligned">
+                            <!--li class="pure-control-group">
+                                <input class="chemis-dixon-value" type="text">
+                                <button class="pure-button" onclick="removeValue(this)">x</button>
+                            </li-->
+                        </ol>
+                    </div>
+                </div>
+                <div id="chemis-dixon-results" class="pure-u-3-5">
+                    <div class="chemis-result-panel">
+                        <h2>Test 95%</h2>
+                        <div class="chemis-result-label">
+                            <div class="chemis-result-label-group">
+                                <div>Result:</div>
+                                <div id="result-95">Approved</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>Lower end:</div>
+                                <div id="le-95">0.0000</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>Upper end:</div>
+                                <div id="ue-95">0.0000</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>N:</div>
+                                <div id="n-95">0</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div style="vertical-align: top">Removed values:</div>
+                                <ul id="rm-95">
+                                    <li>---</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chemis-result-panel">
+                        <h2>Test 99%</h2>
+                        <div class="chemis-result-label">
+                            <div class="chemis-result-label-group">
+                                <div>Result:</div>
+                                <div id="result-99">Approved</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>Lower end:</div>
+                                <div id="le-99">0.0000</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>Upper end:</div>
+                                <div id="ue-99">0.0000</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div>N:</div>
+                                <div id="n-99">0</div>
+                            </div>
+                            <div class="chemis-result-label-group">
+                                <div style="vertical-align: top">Removed values:</div>
+                                <ul id="rm-99">
+                                    <li>---</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chemis-control-panel" class="pure-u-1">
+        <div class="pure-g-r">
+            <button class="chemis-control-button pure-button pure-u-1-8" onclick="addValue()">Add value</button>
+            <button class="chemis-control-button pure-button pure-u-1-8" onclick="calc()">Calculate</button>
+            <button class="chemis-control-button pure-button pure-u-1-8" onclick="clearAll()">Clear All Values</button>
+        </div>
+    </div>
+    </div>
 </body>
+
+<script type="text/javascript">
+    function addValue() {
+        $("#chemis-dixon-values-list").append(
+            $('<li />').addClass("pure-control-group").append(
+                $('<input />').addClass("chemis-dixon-value").attr("type", "text")
+            ).append(
+                $("<button />").addClass("pure-button").text("x").attr("onclick", "removeValue(this)")
+            )
+        );
+        var valuesCount = $(".chemis-dixon-value").length;
+        $("#chemis-dixon-values-count").text("Values: " + valuesCount)
+    }
+
+    function removeValue(self) {
+        var valuesCount = $(".chemis-dixon-value").length;
+        if (valuesCount > 3) {
+            $(self).parent().remove();
+            $("#chemis-dixon-values-count").text("Values: " + (valuesCount - 1))
+        }
+    }
+
+    function clearAll() {
+        $("#chemis-dixon-values-list").html("");
+        for (i = 0; i < 3; i++) {
+            addValue();
+        }
+    }
+
+    function displayResults(dixon,results){
+        console.log("Display: "+dixon)
+        console.log("Display: "+results)
+        if(dixon!=null){
+            var per=results.percent;
+            console.log("Percent: "+per);
+            console.log($("result-"+per));
+            $("#result-"+per).html("Approved");
+            $("#le-"+per).html(results.lowerEnd);
+            $("#ue-"+per).html(results.upperEnd);
+            $("#n-"+per).html(dixon.getN());
+            if(dixon.removed.length==0){
+                $("#rm-"+per).html($("<li />").text("---"));
+            }else{
+                $("#rm-"+per).html("");
+            }
+            $.each(dixon.removed,function(){
+                $("#rm-"+per).append($("<li />").text(this));
+            });
+        }else{
+            alert("reprovado");
+        }
+    }
+    
+    function valuesToDixon(){
+        var values=$("#chemis-dixon-values-list .chemis-dixon-value");
+        var dixon=new Dixon();
+        $.each(values,function(){
+            dixon.addValue(parseFloat($(this).val()));
+        });
+        
+        return dixon;
+    }
+    
+    function calc(){
+        var dixon95=valuesToDixon();
+        var dixon99=valuesToDixon();
+        
+        try{
+            displayResults(dixon95,DixonControl.calc(dixon95,95));
+        }catch(err){
+            console.log(err.message)
+            displayResults(null,95);
+        }
+        
+        try{
+            displayResults(dixon99,DixonControl.calc(dixon99,99));
+        }catch(err){
+            console.log(err.message);
+            displayResults(null,99);
+        }
+    }
+    
+    
+    clearAll();
+</script>
+
 </html>
