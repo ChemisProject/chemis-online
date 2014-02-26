@@ -1,28 +1,43 @@
 @CHARSET "UTF-8";
 
-@font-face{
-	font-family: Colaborate-Thin;
-	src: url('Colaborate/ColabThi.ttf');
+@font-face {
+	font-family: 'Colaborate-Thin';
+	src: url('Colaborate/ColabThi.eot');
+	src: local('☺'), url('Colaborate/ColabThi.woff') format('woff'), url('Colaborate/ColabThi.ttf') format('truetype'), url('Colaborate/ColabThi.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-@font-face{
-	font-family: Colaborate-Light;
-	src: url('Colaborate/ColabLig.ttf');
+@font-face {
+	font-family: 'Colaborate-Light';
+	src: url('Colaborate/ColabLig.eot');
+	src: local('☺'), url('Colaborate/ColabLig.woff') format('woff'), url('Colaborate/ColabLig.ttf') format('truetype'), url('Colaborate/ColabLig.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-@font-face{
-	font-family: Colaborate-Regular;
-	src: url('Colaborate/ColabReg.ttf');
+@font-face {
+	font-family: 'Colaborate-Regular';
+	src: url('Colaborate/ColabReg.eot');
+	src: local('☺'), url('Colaborate/ColabReg.woff') format('woff'), url('Colaborate/ColabReg.ttf') format('truetype'), url('Colaborate/ColabReg.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-@font-face{
-	font-family: Colaborate-Bold;
-	src: url('Colaborate/ColabBol.ttf');
+@font-face {
+	font-family: 'Colaborate-Bold';
+	src: url('Colaborate/ColabBol.eot');
+	src: local('☺'), url('Colaborate/ColabBol.woff') format('woff'), url('Colaborate/ColabBol.ttf') format('truetype'), url('Colaborate/ColabBol.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
-@font-face{
-	font-family: Colaborate-Medium;
-	src: url('Colaborate/ColabMed.ttf');
+@font-face {
+	font-family: 'Colaborate-Medium';
+	src: url('Colaborate/ColabMed.eot');
+	src: local('☺'), url('Colaborate/ColabMed.woff') format('woff'), url('Colaborate/ColabMed.ttf') format('truetype'), url('Colaborate/ColabMed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 html, body{
@@ -35,7 +50,7 @@ body,
 .pure-g [class *= "pure-u"],
 .pure-g-r [class *= "pure-u"] {
     /* Set your content font stack here: */
-    font-family: Colaborate-Thin;
+    font-family: Colaborate-Thin, DejaVu, sans-serif;
 }
 
 h2{
@@ -45,6 +60,7 @@ h2{
 .pure-form input:focus{
     border: 1px solid #7e0080!important;
 }
+
 
 .pure-form-aligned .pure-control-group label{
 	width: 3em;
@@ -56,13 +72,28 @@ h2{
 	font-size: 0.8em;
 }
 
-.pure-button:hover{
+.chemis-green-button{
+    background-color: #66a268;
+	color: white;
+}
+
+.chemis-blue-button{
+    background-color: #667fa2;
+	color: white;
+}
+
+.chemis-red-button{
+    background-color: #a2666a;
+	color: white;
+}
+/*.pure-button:hover{
 	background-color: #BE8EBF;
 }
 
 .pure-button:active{
 	background-color: #E5AAE6;
-}
+}*/
+
 
 /*chemis*/
 #chemis-page{
@@ -108,10 +139,6 @@ h2{
 	padding: 0.5em;
 }
 
-.chemis-fill-parent{
-	
-}
-
 .chemis-menu-item{
 	width: 100%;
 	height: 5em;
@@ -140,18 +167,51 @@ h2{
 	background-color: #E6E6E6!important;
 }
 
+#chemis-control-panel{
+    position: static;
+    position: fixed;
+    width: 100%;
+    height: 3em;
+    bottom: 0;
+    left: 0;
+    padding-left: 6em;
+}
+
+#chemis-control-panel > div{
+    position: relative;
+    height: 100%;
+    background-color: #ccc;
+    
+}
+
+.chemis-control-button{
+    min-width: 12em;
+    height: 100%;
+    margin-left: 0.3em;
+}
+
 /*Dixon*/
 #chemis-dixon-values{
 }
 
 #chemis-dixon-values-list{
-    max-height: 30em;
+    height: 30em;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.chemis-dixon-value{
+.chemis-dixon-value,.chemis-dixon-value-rem{
     margin-right: 0.5em;
+}
+
+.chemis-dixon-value-removed{
+    border: 1px solid #ca3333;
+    transition: .1s border;
+}
+
+.chemis-dixon-value-invalid{
+    color: #ca3333;
+    transition: .1s color;
 }
 
 #chemis-dixon-results{
@@ -184,28 +244,6 @@ h2{
 
 .chemis-result-label-group > div:nth-of-type(2){
     font-size: 1.3em;
-}
-
-#chemis-control-panel{
-    position: static;
-    position: fixed;
-    width: 100%;
-    height: 3em;
-    bottom: 0;
-    left: 0;
-    padding-left: 6em;
-}
-
-#chemis-control-panel > div{
-    position: relative;
-    height: 100%;
-    background-color: #ccc;
-    
-}
-
-.chemis-control-button{
-    height: 100%;
-    margin-left: 0.3em;
 }
 
 #rm-95, #rm-99{
