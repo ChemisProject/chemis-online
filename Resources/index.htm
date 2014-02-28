@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ChemisDesktop Alpha</title>
     <link rel="stylesheet" href="css/pure-min.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/chemis-style.css">
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/countUp/countUp.min.js"></script>
     <script type="text/javascript" src="js/chemis-core.js"></script>
@@ -117,50 +117,6 @@
     </div>
 </body>
 
-<script type="text/javascript">
-    function fieldMoveUp(){
-        if(document.activeElement!=null){
-            var allFields=getAllFields();
-            var index=allFields.index(document.activeElement);
-            if(index!=-1&&index!=0){
-                allFields[index-1].focus();
-                console.log("Move up")
-            }else if(index==0){
-                getAllFields()[0].focus();
-            }
-        }
-    }
-    
-    function fieldMoveDown(){
-        if(document.activeElement!=null){
-            var allFields=getAllFields();
-            var index=allFields.index(document.activeElement);
-            if(index!=-1&&index!=allFields.length-1){
-                allFields[index+1].focus();
-                console.log("Move down")
-            }else if(index==allFields.length-1){
-                addValueField();
-                getAllFields()[index+1].focus();
-            }
-        }
-    }
-    
-    function removeEmptyField(){
-        var active=document.activeElement;
-        if($(active).val()==""&&getAllFields().length>3){
-            if(getAllFields().index(active)==0){
-                fieldMoveDown();
-                removeValueField(active);
-            }else{
-                fieldMoveUp();
-                removeValueField(active);
-            }
-        }else if($(active).val()==""){
-            fieldMoveUp();
-        }
-    }
-    
-    clearAllFields();
-</script>
+<script type="text/javascript" src="js/dixon-core-ui.js"></script>
 
 </html>
