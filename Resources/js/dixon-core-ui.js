@@ -7,7 +7,7 @@ function addValueField() {
         )
     );
     var valuesCount = $(".chemis-dixon-value").length;
-    $("#chemis-dixon-values-count").text("Valores: " + valuesCount)
+    $("#chemis-dixon-values-count").text("Valores: " + valuesCount);
 }
 
 function removeValueField(self) {
@@ -18,7 +18,7 @@ function removeValueField(self) {
         $(self).parent().fadeOut(300, function () {
             $(this).remove();
         });
-        $("#chemis-dixon-values-count").text("Values: " + (valuesCount - 1))
+        $("#chemis-dixon-values-count").text("Values: " + (valuesCount - 1));
     }
 }
 
@@ -35,7 +35,7 @@ function clearAllFields() {
 
 function displayResults(dixon, results) {
     var per = results.percent;
-    if (dixon != null) {
+    if (dixon !== null) {
         $("#result-" + per).html("Aprovado");
         //$("#le-" + per).html(results.lowerEnd);
         //$("#ue-" + per).html(results.upperEnd);
@@ -49,7 +49,7 @@ function displayResults(dixon, results) {
         ue.start();
         n.start();
         q.start();
-        if (dixon.removed.length == 0) {
+        if (dixon.removed.length === 0) {
             $("#rm-" + per).html($("<li />").text("---"));
         } else {
             $("#rm-" + per).html("");
@@ -78,7 +78,7 @@ function valuesToDixon() {
         if (validateField(this, value, index, dixon)) {
             console.log("Value added:" + value);
             $(this).removeClass("chemis-dixon-value-invalid");
-            $(this).val(value)
+            $(this).val(value);
             dixon.addValue(value);
         }
     });
@@ -87,17 +87,17 @@ function valuesToDixon() {
 }
 
 function validateField(field, value, index, dixon) {
-    if ($(field).val() == "") {
+    if ($(field).val() === "") {
         removeValueField(field);
-        console.log("Index #" + (index + 1) + " removed - empty value")
+        console.log("Index #" + (index + 1) + " removed - empty value");
         return false;
-    } else if (dixon.values.indexOf(parseFloat(value)) != -1) {
-        removeValueField(field);
-        console.log("Index #" + (index + 1) + " removed - duplicated value")
-        return false;
-    } else if (Number.isNaN(value)) {
+    } else if (isNaN(value)) {
         $(field).addClass("chemis-dixon-value-invalid");
         console.log("Index #" + (index + 1) + " alert - Not a Number");
+    } else if (dixon.values.indexOf(parseFloat(value)) != -1) {
+        removeValueField(field);
+        console.log("Index #" + (index + 1) + " removed - duplicated value");
+        return false;
     } else {
         return true;
     }
@@ -106,42 +106,50 @@ function validateField(field, value, index, dixon) {
 function calcDixon() {
     var dixon95 = valuesToDixon();
     var dixon99 = valuesToDixon();
-
+    var register = new DixonRegister("Resultado " + getCurrentDate() + " " + getCurrentTime(), new Date());
+    register.dixon95(dixon95);
+    register.dixon99(dixon99);
     try {
-        displayResults(dixon95, DixonControl.calc(dixon95, 95));
+        var result95 = DixonControl.calc(dixon95, 95);
+        register.result95(result95); /*salva registro95*/
+        displayResults(dixon95, result95);
     } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
         displayResults(null, JSON.parse('{"percent":95}'));
     }
 
     try {
-        displayResults(dixon99, DixonControl.calc(dixon99, 99));
+        var result99 = DixonControl.calc(dixon99, 99);
+        register.result99(result99); /*salva registro99*/
+        displayResults(dixon99, result99);
     } catch (err) {
         console.log(err.message);
         displayResults(null, JSON.parse('{"percent":99}'));
     }
+    dixonHistory.addRegister(register);
+    addHistoryRegister(register);
 }
 
 function fieldMoveUp() {
-    if (document.activeElement != null) {
+    if (document.activeElement !== null) {
         var allFields = getAllFields();
         var index = allFields.index(document.activeElement);
-        if (index != -1 && index != 0) {
+        if (index != -1 && index !== 0) {
             allFields[index - 1].focus();
-            console.log("Move up")
-        } else if (index == 0) {
+            console.log("Move up");
+        } else if (index === 0) {
             getAllFields()[0].focus();
         }
     }
 }
 
 function fieldMoveDown() {
-    if (document.activeElement != null) {
+    if (document.activeElement !== null) {
         var allFields = getAllFields();
         var index = allFields.index(document.activeElement);
         if (index != -1 && index != allFields.length - 1) {
             allFields[index + 1].focus();
-            console.log("Move down")
+            console.log("Move down");
         } else if (index == allFields.length - 1) {
             addValueField();
             getAllFields()[index + 1].focus();
@@ -151,24 +159,33 @@ function fieldMoveDown() {
 
 function removeEmptyField() {
     var active = document.activeElement;
-    if ($(active).val() == "" && getAllFields().length > 3) {
-        if (getAllFields().index(active) == 0) {
+    if ($(active).val() === "" && getAllFields().length > 3) {
+        if (getAllFields().index(active) === 0) {
             fieldMoveDown();
             removeValueField(active);
         } else {
             fieldMoveUp();
             removeValueField(active);
         }
-    } else if ($(active).val() == "") {
+    } else if ($(active).val() === "") {
         fieldMoveUp();
     }
 }
 
+function addHistoryRegister(register){
+    var list=$("#dixon-history-list");
+    var item=$("<li />").html($("<a />").attr("id","reg-"+register.date().getTime()).attr("href","#reg-show").attr("title","Registro").text(register.name()));
+    $(list).append($(item));
+    console.log("Registro adicionado")
+}
+
 var options = {  
     useEasing: true,
-      useGrouping: true,
-      separator: ',',
-      decimal: '.'
-}
+    useGrouping: true,
+    separator: ',',
+    decimal: '.'
+};
+
+var dixonHistory = new DixonHistory();
 
 clearAllFields();
