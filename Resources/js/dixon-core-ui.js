@@ -1,9 +1,13 @@
 function addValueField() {
     $("#chemis-dixon-values-list").append(
         $('<li />').addClass("pure-control-group").append(
-            $('<input />').addClass("chemis-dixon-value").attr("type", "text").attr("placeholder", "0,000")
+            $("<div/>").append(
+                $('<input />').addClass("chemis-dixon-value").attr("type", "text").attr("placeholder", "0,000")
+            )
         ).append(
-            $("<button />").addClass("pure-button").text("x").attr("onclick", "removeValueField(this)")
+            $("<div/>").append(
+                $("<button />").addClass("pure-button").text("X").attr("onclick", "removeValueField(this)")
+            )
         )
     );
     var valuesCount = $(".chemis-dixon-value").length;
@@ -15,7 +19,7 @@ function removeValueField(self) {
     if (valuesCount > 3) {
         $(self).addClass("chemis-dixon-value-rem");
         $(self).removeClass("chemis-dixon-value");
-        $(self).parent().fadeOut(300, function () {
+        $(self).parent().parent().fadeOut(300, function () {
             $(this).remove();
         });
         $("#chemis-dixon-values-count").text("Values: " + (valuesCount - 1));
@@ -65,6 +69,11 @@ function displayResults(dixon, results) {
         $("#q-" + per).html("---");
         $("#rm-" + per).html($("<li />").text("---"));
     }
+}
+
+function displayRegister(register){
+    //$("#reg-show")
+    $("#modal-label");
 }
 
 function valuesToDixon() {

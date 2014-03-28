@@ -3,7 +3,7 @@
 <!-- These values are edited/maintained by TideSDK Developer -->
 <id>org.chemis.desktop</id>
 <name>Chemis</name>
-<version>0.7</version>
+<version>0.7.3</version>
 <publisher>guilherme</publisher>
 <url>chemis.org</url>
 <icon>chemis-icon-256.png</icon>

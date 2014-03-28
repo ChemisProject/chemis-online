@@ -3,12 +3,33 @@
 
 #chemis-dixon-values-list{
     height: 30em;
+    padding: 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
+#chemis-dixon-values-list li{
+    display: table!important;
+    width: 100%!important;
+}
+
+#chemis-dixon-values-list li div{
+    width: 100%!important; 
+    display: table-cell!important;
+    text-wrap: none!important;
+    overflow: hidden!important;
+}
+
+#chemis-dixon-values-list li button{
+    vertical-align: top!important; 
+    height: 2.8em!important;
+}
+
 .chemis-dixon-value,.chemis-dixon-value-rem{
-    margin-right: 0.5em;
+    display: table-cell!important;
+    width: 100%!important;
+    vertical-align: top!important;
+    height: 2.8em!important;
 }
 
 .chemis-dixon-value-removed{

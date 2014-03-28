@@ -1,7 +1,7 @@
 #appname: Chemis
 #appid: org.chemis.desktop
 #guid: 29e8dc14-0fb2-4fa4-b331-ba682581fec0
-#version: 0.7
+#version: 0.7.3
 #image: chemis-icon-256.png
 #publisher: guilherme
 #url: chemis.org

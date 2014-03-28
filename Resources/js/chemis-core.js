@@ -25,14 +25,17 @@ var menuOpened=false;
 
 function openMenu(){
     var menu=$("#chemis-menu-bar");
+    var mask=$("#chemis-menu-mask");
     if(menuOpened){
         console.log("Fechou");
         $(menu).animate({left:"-15em"},200);
+        $(mask).removeClass("chemis-menu-mask-open");
         menuOpened=false;
     }else{
         $(menu).css("left","-15em");
         console.log("Abriu");
         $(menu).animate({left:0},200);
+        $(mask).addClass("chemis-menu-mask-open");
         menuOpened=true;
     }
 }
