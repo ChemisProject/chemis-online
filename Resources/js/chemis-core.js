@@ -18,24 +18,25 @@ function dixonEvents(e) {
         break;
     case 8: removeEmptyField();
         break;
+	case 27: openMenu();
+		break;
     }
 }
 
 var menuOpened=false;
 
 function openMenu(){
-    var menu=$("#chemis-menu-bar");
+    var menu=$("#chemis-menu");
     var mask=$("#chemis-menu-mask");
     if(menuOpened){
         console.log("Fechou");
-        $(menu).animate({left:"-15em"},200);
-        $(mask).removeClass("chemis-menu-mask-open");
+        $(menu).removeClass("open");
+        $(mask).removeClass("open");
         menuOpened=false;
     }else{
-        $(menu).css("left","-15em");
         console.log("Abriu");
-        $(menu).animate({left:0},200);
-        $(mask).addClass("chemis-menu-mask-open");
+		$(menu).addClass("open");
+        $(mask).addClass("open");
         menuOpened=true;
     }
 }

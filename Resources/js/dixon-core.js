@@ -67,62 +67,62 @@ dixonConstants['99_30'] = 0.483;
 Class model
 */
 function Dixon() {
-    this.values = new Array();
-    this.removed = new Array();
-    console.log("Dixon Object initialized");
+	this.values = new Array();
+	this.removed = new Array();
+	console.log("Dixon Object initialized");
 }
 
 Dixon.prototype.addValue = function (value) {
-    if (this.values.indexOf(value) == -1) {
-        this.values.push(value);
-    }
+	if (this.values.indexOf(value) == -1) {
+		this.values.push(value);
+	}
 };
 
 Dixon.prototype.removeValueAt = function (index) {
-    if (this.values.length !== 0) {
-        this.removed.push(this.values.splice(index, 1)[0]);
-    }
+	if (this.values.length !== 0) {
+		this.removed.push(this.values.splice(index, 1)[0]);
+	}
 };
 
 Dixon.prototype.removeValue = function (value) {
-    var index = this.values.indexOf(value);
-    if (index != -1) {
-        this.removed.push(this.values.splice(index, 1)[0]);
-    }
+	var index = this.values.indexOf(value);
+	if (index != -1) {
+		this.removed.push(this.values.splice(index, 1)[0]);
+	}
 };
 
 Dixon.prototype.getValueAt = function (index) {
-    return this.values[index];
+	return this.values[index];
 };
 
 Dixon.prototype.getFirstValue = function () {
-    return this.getValueAt(0);
+	return this.getValueAt(0);
 };
 
 Dixon.prototype.removeFirstValue = function () {
-    this.removeValueAt(0);
+	this.removeValueAt(0);
 };
 
 Dixon.prototype.getLastValue = function () {
-    return this.getValueAt(this.values.length - 1);
+	return this.getValueAt(this.values.length - 1);
 };
 
 Dixon.prototype.removeLastValue = function () {
-    this.removeValueAt(this.values.length - 1);
+	this.removeValueAt(this.values.length - 1);
 };
 
 Dixon.prototype.sortValues = function () {
-    this.values.sort(function (a, b) {
-        return a - b;
-    });
+	this.values.sort(function (a, b) {
+		return a - b;
+	});
 };
 
 Dixon.prototype.getN = function () {
-    return this.values.length;
+	return this.values.length;
 };
 
 Dixon.prototype.clear = function () {
-    this.values.splice(0);
+	this.values.splice(0);
 };
 
 /*
@@ -130,8 +130,8 @@ Class exception
 */
 
 function DixonException(message) {
-    this.message = message;
-    this.name = "Chemis Dixon Exception";
+	this.message = message;
+	this.name = "Chemis Dixon Exception";
 }
 
 /*
@@ -140,138 +140,149 @@ Class control
 function DixonControl() {}
 
 DixonControl.approved = function approved(value, percent, dixon) {
-    return (value < dixonConstants["" + percent + "_" + dixon.getN()]);
+	return (value < dixonConstants["" + percent + "_" + dixon.getN()]);
 };
 
 //lower end functions
 DixonControl.getLowerEnd3_7 = function (values) {
-    return (values[1] - values[0]) / (values[values.length - 1] - values[0]);
+	return (values[1] - values[0]) / (values[values.length - 1] - values[0]);
 };
 
 DixonControl.getLowerEnd8_12 = function (values) {
-    return (values[1] - values[0]) / (values[values.length - 2] - values[0]);
+	return (values[1] - values[0]) / (values[values.length - 2] - values[0]);
 };
 
 DixonControl.getLowerEnd13 = function (values) {
-    return (values[2] - values[0]) / (values[values.length - 3] - values[0]);
+	return (values[2] - values[0]) / (values[values.length - 3] - values[0]);
 };
 
 //Upper end functions
 DixonControl.getUpperEnd3_7 = function (values) {
-    return (values[values.length - 1] - values[values.length - 2]) / (values[values.length - 1] - values[0]);
+	return (values[values.length - 1] - values[values.length - 2]) / (values[values.length - 1] - values[0]);
 };
 
 DixonControl.getUpperEnd8_12 = function (values) {
-    return (values[values.length - 1] - values[values.length - 2]) / (values[values.length - 1] - values[1]);
+	return (values[values.length - 1] - values[values.length - 2]) / (values[values.length - 1] - values[1]);
 };
 
 DixonControl.getUpperEnd13 = function (values) {
-    return (values[values.length - 1] - values[values.length - 3]) / (values[values.length - 1] - values[2]);
+	return (values[values.length - 1] - values[values.length - 3]) / (values[values.length - 1] - values[2]);
 };
 
 DixonControl.recursiveCalc = function (dixonObj, resultsObj) {
-    var lowerEnd = 0;
-    var upperEnd = 0;
+	var lowerEnd = 0;
+	var upperEnd = 0;
 
-    if (dixonObj.getN() < 3) {
-        throw new DixonException("'n' is lower than 3");
-    } else if (dixonObj.getN() >= 3 && dixonObj.getN() <= 7) {
-        lowerEnd = DixonControl.getLowerEnd3_7(dixonObj.values);
-        upperEnd = DixonControl.getUpperEnd3_7(dixonObj.values);
-    } else if (dixonObj.getN() >= 8 && dixonObj.getN() <= 12) {
-        lowerEnd = DixonControl.getLowerEnd8_12(dixonObj.values);
-        upperEnd = DixonControl.getUpperEnd8_12(dixonObj.values);
-    } else if (dixonObj.getN() >= 13) {
-        lowerEnd = DixonControl.getLowerEnd13(dixonObj.values);
-        upperEnd = DixonControl.getUpperEnd13(dixonObj.values);
-    }
+	if (dixonObj.getN() < 3) {
+		throw new DixonException("'n' is lower than 3");
+	} else if (dixonObj.getN() >= 3 && dixonObj.getN() <= 7) {
+		lowerEnd = DixonControl.getLowerEnd3_7(dixonObj.values);
+		upperEnd = DixonControl.getUpperEnd3_7(dixonObj.values);
+	} else if (dixonObj.getN() >= 8 && dixonObj.getN() <= 12) {
+		lowerEnd = DixonControl.getLowerEnd8_12(dixonObj.values);
+		upperEnd = DixonControl.getUpperEnd8_12(dixonObj.values);
+	} else if (dixonObj.getN() >= 13) {
+		lowerEnd = DixonControl.getLowerEnd13(dixonObj.values);
+		upperEnd = DixonControl.getUpperEnd13(dixonObj.values);
+	}
 
-    if (DixonControl.approved(lowerEnd, resultsObj.percent, dixonObj)) {
-        resultsObj.lowerEnd = lowerEnd;
-    } else {
-        dixonObj.removeFirstValue();
-        resultsObj.lowerEnd = DixonControl.recursiveCalc(dixonObj, resultsObj).lowerEnd;
-    }
+	if (DixonControl.approved(lowerEnd, resultsObj.percent, dixonObj)) {
+		resultsObj.lowerEnd = lowerEnd;
+	} else {
+		dixonObj.removeFirstValue();
+		resultsObj.lowerEnd = DixonControl.recursiveCalc(dixonObj, resultsObj).lowerEnd;
+	}
 
-    if (DixonControl.approved(upperEnd, resultsObj.percent, dixonObj)) {
-        resultsObj.upperEnd = upperEnd;
-    } else {
-        dixonObj.removeLastValue();
-        resultsObj.upperEnd = DixonControl.recursiveCalc(dixonObj, resultsObj).upperEnd;
-    }
+	if (DixonControl.approved(upperEnd, resultsObj.percent, dixonObj)) {
+		resultsObj.upperEnd = upperEnd;
+	} else {
+		dixonObj.removeLastValue();
+		resultsObj.upperEnd = DixonControl.recursiveCalc(dixonObj, resultsObj).upperEnd;
+	}
 
-    return resultsObj;
+	return resultsObj;
 };
 
 DixonControl.calc = function (dixonObj, percent) {
-    dixonObj.sortValues();
-    var resultsObj = JSON.parse('{"lowerEnd":0,"upperEnd":0,"percent":' + percent + '}');
-    return DixonControl.recursiveCalc(dixonObj, resultsObj);
+	dixonObj.sortValues();
+	var resultsObj = JSON.parse('{"lowerEnd":0,"upperEnd":0,"percent":' + percent + '}');
+	return DixonControl.recursiveCalc(dixonObj, resultsObj);
 };
 
 /*
 Class register
 */
 function DixonRegister(name, date, result95, dixon95, result99, dixon99) {
-    this.rName = name;
-    this.rDate = date;
-    this.rResult95 = result95;
-    this.rDixon95= dixon95;
-    this.rResult99 = result99;
-    this.rDixon99= dixon99;
+	this.rName = name;
+	this.rDate = date;
+	this.rResult95 = result95;
+	this.rDixon95= dixon95;
+	this.rResult99 = result99;
+	this.rDixon99= dixon99;
 }
 
 DixonRegister.prototype.name = function (name) {
-    if (name !== undefined) {
-        this.rName = name;
-    }
-    return this.rName;
+	if (name !== undefined) {
+		this.rName = name;
+	}
+	return this.rName;
 };
 
 DixonRegister.prototype.date = function (date) {
-    if (date !== undefined) {
-        this.rDate = date;
-    }
-    return this.rDate;
+	if (date !== undefined) {
+		this.rDate = date;
+	}
+	return this.rDate;
 };
 
 DixonRegister.prototype.result95 = function (result95) {
-    if (result95 !== undefined) {
-        this.rResult95 = result95;
-    }
-    return this.rResult95;
+	if (result95 !== undefined) {
+		this.rResult95 = result95;
+	}
+	return this.rResult95;
 };
 
 DixonRegister.prototype.result99 = function (result99) {
-    if (result99 !== undefined) {
-        this.rResult99 = result99;
-    }
-    return this.rResult99;
+	if (result99 !== undefined) {
+		this.rResult99 = result99;
+	}
+	return this.rResult99;
 };
 
 DixonRegister.prototype.dixon95 = function (dixon95) {
-    if (dixon95 !== undefined) {
-        this.rDixon95 = dixon95;
-    }
-    return this.rDixon95;
+	if (dixon95 !== undefined) {
+		this.rDixon95 = dixon95;
+	}
+	return this.rDixon95;
 };
 
 DixonRegister.prototype.dixon99 = function (dixon99) {
-    if (dixon99 !== undefined) {
-        this.rDixon99 = dixon99;
-    }
-    return this.rDixon99;
+	if (dixon99 !== undefined) {
+		this.rDixon99 = dixon99;
+	}
+	return this.rDixon99;
 };
 
 /*
 Class History
 */
 function DixonHistory() {
-    this.registers=new Array();
-    console.log("Dixon History initialized!");
-};
+	this.registers=new Array();
+	console.log("Dixon History initialized!");
+}
 
 DixonHistory.prototype.addRegister=function(register){
-    this.registers.push(register);
-    console.log("Registro adicionado ao histórico!")
+	this.registers.push(register);
+	console.log("Registro adicionado ao histórico!");
+};
+
+DixonHistory.prototype.getRegisterById=function(id){
+	var register=null;
+	$.each(this.registers,function(){
+		if(this.rDate.getTime()==id.split("-")[1]){
+			console.log("Achou registro!");
+			register=this;
+		}
+	});
+	return register;
 };

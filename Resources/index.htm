@@ -1,262 +1,181 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <!--320-->
-    <title>ChemisDesktop Alpha</title>
-    <link rel="stylesheet" href="css/pure-min.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/chemis-style.css">
-    <link rel="stylesheet" href="css/dixon-style.css">
-    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="js/countUp/countUp.min.js"></script>
-    <script type="text/javascript" src="js/modal.js"></script>
-    <script type="text/javascript" src="js/chemis-core.js"></script>
-    <script type="text/javascript" src="js/dixon-core.js"></script>
+<head profile="http://www.w3.org/2005/10/profile">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	<!--320-->
+	<title>ChemisDesktop Alpha</title>
+
+	<link rel="icon" type="image/png" href="Chemis-2014-64.png">
+	<link rel="stylesheet" href="css/pure-min.css">
+	<link rel="stylesheet" href="css/modal.css">
+	<link rel="stylesheet" href="css/chemis-style.css">
+	<link rel="stylesheet" href="css/dixon-style.css">
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/countUp/countUp.min.js"></script>
+	<script type="text/javascript" src="js/modal.js"></script>
+	<script type="text/javascript" src="js/chemis-core.js"></script>
+	<script type="text/javascript" src="js/dixon-core.js"></script>
 </head>
 
 <body>
-    <div id="chemis-page" class="pure-g-r">
-        <div class="chemis-menu-container pure-u">
-            <a href="#" class="pure-menu-heading chemis-menu" onclick="openMenu()">
-                <img src="img/list2.png" />
-            </a>
-            <a href="index.php" class="pure-menu-heading chemis-logo">
-                <img src="img/nav.png" />
-            </a>
-            <div class="pure-menu pure-menu-open pure-menu-horizontal chemis-tool-bar">
-                <ul>
-                    <li>
-                        <a href="#" onclick="calcDixon()" title="Calcular">
-                            <img src="img/calculator.png">
-                            <span class="pure-hidden-phone">Calcular</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" onclick="addValueField()" title="Novo valor">
-                            <img src="img/plus.png">
-                            <span class="pure-hidden-phone">Novo valor</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" onclick="clearAllFields()" title="Remover tudo">
-                            <img src="img/trash.png">
-                            <span class="pure-hidden-phone">Remover tudo</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div id="chemis-menu-bar" class="pure-u">
-            <div>
-                <div class="chemis-menu-bar-top">
-                    <ul id="chemis-vertical-menu" class="pure-menu pure-menu-open chemis-panel">
-                        <li id="chemis-item-dixon">
-                            <a href="#" onclick="openMenu()">
-                                <img src="img/dixon-icon.png">
-                                <span>Teste Q</span>
-                            </a>
-                        </li>
-                        <li id="chemis-item-settings">
-                            <a href="#" onclick="openMenu()">
-                                <img src="img/settings.png">
-                                <span>Configurações</span>
-                            </a>
-                        </li>
-                        <li id="chemis-item-help">
-                            <a href="#" onclick="openMenu()">
-                                <img src="img/help-icon.png">
-                                <span>Ajuda</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="chemis-menu-mask" onclick="openMenu()"></div>
-        <div id="chemis-main-panel" class="pure-u-1">
-            <div class="pure-g-r">
-                <div id="chemis-dixon-values" class="pure-u-1-3">
-                    <div class="chemis-dixon-panel">
-                        <h2 id="chemis-dixon-values-count">Valores: 3</h2>
-                        <ul id="chemis-dixon-values-list" class="pure-form pure-form-aligned">
-                            <!--li class="pure-control-group">
+	<header id="chemis-header" class="pure-u">
+		<a href="#" class="pure-menu-heading" onclick="openMenu()">
+			<img src="img/list2.png" />
+		</a>
+		<a href="#" class="pure-menu-heading">
+			<img class="logo" src="chemis-2014-64-glow.png" />
+		</a>
+		<div id="chemis-tool-bar" class="pure-menu pure-menu-open pure-menu-horizontal">
+			<ul>
+				<li>
+					<a href="#" onclick="calcDixon()" title="Calcular">
+						<img src="img/calculator.png">
+						<span class="pure-hidden-phone">Calcular</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" onclick="addValueField()" title="Novo valor">
+						<img src="img/plus.png">
+						<span class="pure-hidden-phone">Novo valor</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" onclick="clearAllFields()" title="Remover tudo">
+						<img src="img/trash.png">
+						<span class="pure-hidden-phone">Remover tudo</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<div id="chemis-menu" class="pure-u">
+		<ul class="pure-menu pure-menu-open chemis-panel">
+			<li id="chemis-item-dixon">
+				<a href="#" onclick="openMenu()">
+					<img src="img/dixon-icon.png">
+					<span>Teste Q</span>
+				</a>
+			</li>
+			<li id="chemis-item-settings">
+				<a href="#" onclick="openMenu()">
+					<img src="img/settings.png">
+					<span>Configurações</span>
+				</a>
+			</li>
+			<li id="chemis-item-help">
+				<a href="#" onclick="openMenu()">
+					<img src="img/help-icon.png">
+					<span>Ajuda</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div id="chemis-menu-mask" onclick="openMenu()"></div>
+
+	<!-- PAGE BEGIN -->
+	<div id="chemis-page" class="pure-g-r">
+		<div id="chemis-main-panel" class="pure-u-1">
+			<div class="pure-g-r">
+				<div id="chemis-dixon-values" class="pure-u-1-3">
+					<div class="chemis-dixon-panel">
+						<h2 id="chemis-dixon-values-count">Valores: 3</h2>
+						<ul id="chemis-dixon-values-list" class="pure-form pure-form-aligned">
+							<!--li class="pure-control-group">
                                 <div>
                                     <input class="chemis-dixon-value" type="text">
                                 </div>
                                 <button class="pure-button" onclick="removeValue(this)">x</button>
                             </li-->
-                        </ul>
-                    </div>
-                </div>
-                <div id="chemis-dixon-results" class="pure-u-1-3">
-                    <div class="chemis-dixon-panel">
-                        <h2>Teste 95%</h2>
-                        <div class="chemis-dixon-result-label">
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Resultado:</div>
-                                <div id="result-95">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Extremo inferior:</div>
-                                <div id="le-95">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Extremo superior:</div>
-                                <div id="ue-95">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>N:</div>
-                                <div id="n-95">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Q:</div>
-                                <div id="q-95">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div style="vertical-align: top">Valores removidos:</div>
-                                <ul id="rm-95">
-                                    <li>---</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chemis-dixon-panel">
-                        <h2>Teste 99%</h2>
-                        <div class="chemis-dixon-result-label">
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Resultado:</div>
-                                <div id="result-99">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Extremo inferior:</div>
-                                <div id="le-99">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Extremo superior:</div>
-                                <div id="ue-99">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>N:</div>
-                                <div id="n-99">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div>Q:</div>
-                                <div id="q-99">---</div>
-                            </div>
-                            <div class="chemis-dixon-result-label-group">
-                                <div style="vertical-align: top">Valores removidos</div>
-                                <ul id="rm-99">
-                                    <li>---</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="chemis-dixon-history" class="pure-u-1-3">
-                    <div class="chemis-dixon-panel">
-                        <h2>Histórico</h2>
-                        <ul id="dixon-history-list">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="chemis-button-group pure-hidden-desktop">
-            <button class="pure-button pure-u-1-3" onclick="clearAllFields()"><img src="img/trash.png"></button>
-            <button class="pure-button pure-u-1-3" onclick="calcDixon()"><img src="img/calculator.png"></button>
-            <button class="pure-button pure-u-1-3" onclick="addValueField()"><img src="img/plus.png"></button>
-        </div>
-    </div>
-    <!-- History modal -->
-    <div class="semantic-content" id="reg-show" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-        <div class="modal-inner">
-            <header>
-                <h2 id="modal-label"></h2>
-            </header>
-            <div class="modal-content">
-                <div class="pure-u-g-r">
-                    <div class="pure-u-1-2">
-                        <div class="chemis-dixon-panel">
-                            <h2>Teste 95%</h2>
-                            <div class="chemis-dixon-result-label">
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Resultado:</div>
-                                    <div id="h-result-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Extremo inferior:</div>
-                                    <div id="h-le-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Extremo superior:</div>
-                                    <div id="h-ue-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>N:</div>
-                                    <div id="h-n-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Q:</div>
-                                    <div id="h-q-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div style="vertical-align: top">Valores removidos:</div>
-                                    <ul id="h-rm-95">
-                                        <li>---</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pure-u-1-2">
-                        <div class="chemis-dixon-panel">
-                            <h2>Teste 95%</h2>
-                            <div class="chemis-dixon-result-label">
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Resultado:</div>
-                                    <div id="h-result-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Extremo inferior:</div>
-                                    <div id="h-le-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Extremo superior:</div>
-                                    <div id="h-ue-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>N:</div>
-                                    <div id="h-n-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div>Q:</div>
-                                    <div id="h-q-95">---</div>
-                                </div>
-                                <div class="chemis-dixon-result-label-group">
-                                    <div style="vertical-align: top">Valores removidos:</div>
-                                    <ul id="h-rm-95">
-                                        <li>---</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <footer>
-                <p>
-                    <button id="chemis-dixon-history-reuse" class="pure-button pure-button-primary">Utilizar</button>
-                    <button id="chemis-dixon-history-close" class="pure-button button-cancel">Fechar</button>
-                </p>
-            </footer>
-        </div>
-        <!-- Use Hash-Bang to maintain scroll position when closing modal -->
-        <a href="#!" class="modal-close" title="Close this modal" data-dismiss="modal">&times;</a>
-    </div>
+						</ul>
+					</div>
+				</div>
+				<div id="chemis-dixon-results" class="pure-u-1-3">
+					<div class="chemis-dixon-panel">
+						<h2>Teste 95%</h2>
+						<div class="chemis-dixon-result-label">
+							<div class="chemis-dixon-result-label-group">
+								<div>Resultado:</div>
+								<div id="result-95">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Extremo inferior:</div>
+								<div id="le-95">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Extremo superior:</div>
+								<div id="ue-95">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>N:</div>
+								<div id="n-95">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Q:</div>
+								<div id="q-95">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div style="vertical-align: top">Valores removidos:</div>
+								<ul id="rm-95">
+									<li>---</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="chemis-dixon-panel">
+						<h2>Teste 99%</h2>
+						<div class="chemis-dixon-result-label">
+							<div class="chemis-dixon-result-label-group">
+								<div>Resultado:</div>
+								<div id="result-99">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Extremo inferior:</div>
+								<div id="le-99">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Extremo superior:</div>
+								<div id="ue-99">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>N:</div>
+								<div id="n-99">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div>Q:</div>
+								<div id="q-99">---</div>
+							</div>
+							<div class="chemis-dixon-result-label-group">
+								<div style="vertical-align: top">Valores removidos</div>
+								<ul id="rm-99">
+									<li>---</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="chemis-dixon-history" class="pure-u-1-3">
+					<div class="chemis-dixon-panel">
+						<h2>Histórico</h2>
+						<ul id="dixon-history-list">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="chemis-button-group pure-hidden-desktop">
+			<button class="pure-button pure-u-1-3" onclick="clearAllFields()">
+				<img src="img/trash.png">
+			</button>
+			<button class="pure-button pure-u-1-3" onclick="calcDixon()">
+				<img src="img/calculator.png">
+			</button>
+			<button class="pure-button pure-u-1-3" onclick="addValueField()">
+				<img src="img/plus.png">
+			</button>
+		</footer>
+	</div>
 </body>
 
 <script type="text/javascript" src="js/dixon-core-ui.js"></script>

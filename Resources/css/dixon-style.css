@@ -1,97 +1,82 @@
-#chemis-dixon-values{
-}
+@CHARSET "UTF-8";
+#chemis-dixon-values {
+  height: 100% !important; }
 
-#chemis-dixon-values-list{
-    height: 30em;
-    padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+#chemis-dixon-values-list {
+  height: 100% !important;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden; }
+  #chemis-dixon-values-list li {
+    display: table !important;
+    width: 100% !important; }
+    #chemis-dixon-values-list li div {
+      width: 100% !important;
+      display: table-cell !important;
+      text-wrap: none !important;
+      overflow: hidden !important; }
+    #chemis-dixon-values-list li button {
+      vertical-align: top !important;
+      height: 2.8em !important; }
 
-#chemis-dixon-values-list li{
-    display: table!important;
-    width: 100%!important;
-}
+.chemis-dixon-value, .chemis-dixon-value-rem {
+  display: table-cell !important;
+  width: 100% !important;
+  height: 2.8em !important;
+  vertical-align: top !important; }
 
-#chemis-dixon-values-list li div{
-    width: 100%!important; 
-    display: table-cell!important;
-    text-wrap: none!important;
-    overflow: hidden!important;
-}
+.chemis-dixon-value-removed {
+  border: 1px solid #ca3333;
+  transition: 0.1s border; }
 
-#chemis-dixon-values-list li button{
-    vertical-align: top!important; 
-    height: 2.8em!important;
-}
+.chemis-dixon-value-invalid {
+  color: #ca3333;
+  transition: 0.1s color; }
 
-.chemis-dixon-value,.chemis-dixon-value-rem{
-    display: table-cell!important;
-    width: 100%!important;
-    vertical-align: top!important;
-    height: 2.8em!important;
-}
+#chemis-dixon-results {
+  display: inline-block;
+  height: 100%; }
 
-.chemis-dixon-value-removed{
-    border: 1px solid #ca3333;
-    transition: .1s border;
-}
+.chemis-dixon-result-label {
+  text-indent: 1em; }
 
-.chemis-dixon-value-invalid{
-    color: #ca3333;
-    transition: .1s color;
-}
+.chemis-dixon-result-label-group {
+  display: block; }
+  .chemis-dixon-result-label-group > * {
+    display: inline-block; }
+  .chemis-dixon-result-label-group > div:nth-of-type(2) {
+    font-size: 1.3em; }
 
-#chemis-dixon-results{
-    display: inline-block;
-    height: 100%;
-}
+#rm-95, #rm-99 {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
 
-.chemis-dixon-result-label{
-	text-indent: 1em;
-}
-
-.chemis-dixon-result-label-group{
-	display: block;
-}
-
-.chemis-dixon-result-label-group> *{
-    display: inline-block;
-}
-
-.chemis-dixon-result-label-group > div:nth-of-type(2){
-    font-size: 1.3em;
-}
-
-#rm-95, #rm-99{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#dixon-history-list{
-    list-style: none;
-    padding: 0;
-}
-
-#dixon-history-list li{
+#dixon-history-list {
+  list-style: none;
+  padding: 0; }
+  #dixon-history-list li {
     margin-top: 1px;
     margin-bottom: 1px;
-    text-align: center;
-}
+    text-align: center; }
+    #dixon-history-list li a {
+      width: 100%;
+      height: 100%;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      text-decoration: none;
+      display: block;
+      white-space: normal;
+      background-color: #a379a3;
+      color: white; }
+    #dixon-history-list li a:hover {
+      text-decoration: underline; }
 
-#dixon-history-list li a{
-    text-decoration: none;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    display: block;
-    width: 100%;
-    height: 100%;
-    white-space: normal;
-    background-color: #A379A3;
-    color: white;
-}
-
-#dixon-history-list li a:hover{
-    text-decoration: underline;
-}
+.dixon-history {
+  background: #1f1f1f;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+  .dixon-history div {
+    color: white; }

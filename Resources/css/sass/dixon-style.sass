@@ -1,0 +1,82 @@
+@CHARSET "UTF-8"
+
+@import _utils
+@import _vars
+
+#chemis-dixon-values
+	height: 100%!important
+	
+#chemis-dixon-values-list
+	height: 100%!important
+	padding: 0
+	overflow-y: auto
+	overflow-x: hidden
+	li
+		display: table!important
+		width: 100%!important
+		div
+			width: 100%!important
+			display: table-cell!important
+			text-wrap: none!important
+			overflow: hidden!important
+		button
+			vertical-align: top!important
+			height: 2.8em!important
+
+.chemis-dixon-value,.chemis-dixon-value-rem
+	display: table-cell!important
+	width: 100%!important
+	height: 2.8em!important
+	vertical-align: top!important
+
+.chemis-dixon-value-removed
+	border: 1px solid #ca3333
+	transition: .1s border
+
+.chemis-dixon-value-invalid
+	color: #ca3333
+	transition: .1s color
+
+#chemis-dixon-results
+	display: inline-block
+	height: 100%
+
+.chemis-dixon-result-label
+	text-indent: 1em
+
+.chemis-dixon-result-label-group
+	display: block
+	>*
+		display: inline-block
+	>div:nth-of-type(2)
+		font-size: 1.3em
+
+#rm-95, #rm-99
+	list-style: none
+	margin: 0
+	padding: 0
+
+#dixon-history-list
+	list-style: none
+	padding: 0
+	li
+		+margin-vertical(1px)
+		text-align: center
+		a
+			+dimension(100%,100%)
+			+padding-vertical(0.5em)
+			text-decoration: none
+			display: block
+			white-space: normal
+			background-color: #A379A3
+			color: white
+		a:hover
+			text-decoration: underline
+
+.dixon-history
+	background: #1F1F1F	
+	+transition(all 0.3s ease-out)
+	div
+		color: white
+//@media all and (max-width: $tablet-width)
+//@media all and (max-width: $mobile-width)

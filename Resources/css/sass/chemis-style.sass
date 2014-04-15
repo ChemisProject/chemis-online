@@ -1,0 +1,166 @@
+@CHARSET "UTF-8"
+
+@import _fonts
+@import _base
+
+/*chemis*/
+#chemis-page
+	position: absolute!important
+	z-index: 2
+	left: 0
+	top: 3em
+	bottom: 0
+	margin: 0
+	width: 100%
+	overflow-x: none
+	overflow-y: auto
+	display: block
+	//height: 100%!important
+
+#chemis-header
+	font-family: Colaborate-Light, DejaVu, sans-serif
+	display: block
+	//position: static
+	//position: fixed
+	position: absolute
+	z-index: 10!important
+	width: 100%
+	height: 2.4em
+	+padding-vertical(0.3em)
+	background-color: #563D7C
+	left: 0
+	top: 0
+	box-shadow: 0 2px 2px #694a97
+	&>a
+		float: left
+		height: 2.4em
+		margin-right: 0.5em
+		margin-left: 0.5em
+		img
+			height: 2.1em
+		img.logo
+			padding: 2px
+			background-color: rgba(255,255,255,0.3)
+
+	#chemis-tool-bar
+		background: none!important	
+		li
+			margin-left: 0!important
+			text-align: center
+			a
+				color: white!important
+				border-radius: 0.1em
+				text-decoration: none
+				vertical-align: middle
+				img,span
+					vertical-align: middle
+				span
+					margin-left: 0.2em
+			a:hover
+				//color: #464646!important
+				background: rgba(255,255,255,0.3)
+			a:active
+				//color: #464646!important
+				background: rgba(255,255,255,0.5)
+			a:focus
+				background: none!important
+		.pure-menu-selected 
+			a
+				color: #464646!important
+				background: #F5F5F5!important
+
+#chemis-menu
+	font-family: Colaborate-Light, DejaVu, sans-serif
+	position: static
+	position: fixed
+	width: 15em
+	bottom: 0
+	top: 3em
+	background-color: #1f1f1f
+	border-right: 1px #707070 solid
+	z-index: 9
+	left: -15em
+	+transition(all 0.2s ease-out)
+	&.open
+		left: 0!important
+	ul
+		height: 100%
+		list-style: none
+		margin: 0
+		border: none
+		background: none
+		li
+			color: #fff!important
+			width: 100%!important
+			margin-bottom: 0.1em!important
+			a
+				padding: 0!important
+				color: white!important
+				span
+					margin-left: 0.5em
+				img
+					height: 2.4em!important
+				img,span
+					vertical-align: middle
+					text-align: center
+			a:hover
+				background-color: rgba(225,225,225,0.3)
+			a:active
+				background-color: rgba(225,225,225,0.5)
+
+#chemis-menu-mask
+	left: 0
+	top: 0
+	z-index: -1
+	position: static
+	position: fixed
+	+dimension(100%!important,100%)
+	background-color: #000000
+	opacity: 0.0
+	+transition(all 0.2s linear)
+	&.open
+		z-index: 8!important
+		display: inherit!important
+		opacity: 0.7!important
+
+#chemis-item-settings 
+	a 
+		img
+			background-color: #ca3333
+
+#chemis-item-dixon 
+	a 
+		img
+			background-color: #43CA33
+
+#chemis-item-help 
+	a 
+		img
+			background-color: #33CAC2
+			bottom: 0
+
+/*==========CLASSES==========*/
+.chemis-login-link
+	float: right
+	display: inline-block
+	margin-right: 1em
+
+.chemis-panel
+	padding: 0em
+
+.chemis-dixon-panel
+	+padding-horizontal(2em)
+	display: block
+	position: relative
+
+.chemis-button-group
+	background-color: #A379A3
+	bottom: 0
+	left: 0
+	top: auto
+	width: 100%
+	position: static
+	position: fixed
+	height: 48px
+	button
+		height: 100%
