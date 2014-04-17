@@ -1,5 +1,6 @@
 @CHARSET "UTF-8"
 
+@import _vars
 @import _fonts
 @import _base
 
@@ -15,7 +16,12 @@
 	overflow-x: none
 	overflow-y: auto
 	display: block
-	//height: 100%!important
+	+transition(all 0.4s ease-out)
+	@media all and (max-width: $tablet-width)
+		bottom: 3em
+	//@media all and (max-width: $mobile-width)
+
+//#chemis-main-panel
 
 #chemis-header
 	font-family: Colaborate-Light, DejaVu, sans-serif

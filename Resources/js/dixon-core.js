@@ -212,9 +212,10 @@ DixonControl.calc = function (dixonObj, percent) {
 /*
 Class register
 */
-function DixonRegister(name, date, result95, dixon95, result99, dixon99) {
+function DixonRegister(name, date, result95, dixon95, result99, dixon99, values) {
 	this.rName = name;
 	this.rDate = date;
+	this.rValues = values;
 	this.rResult95 = result95;
 	this.rDixon95= dixon95;
 	this.rResult99 = result99;
@@ -233,6 +234,13 @@ DixonRegister.prototype.date = function (date) {
 		this.rDate = date;
 	}
 	return this.rDate;
+};
+
+DixonRegister.prototype.values = function (values) {
+	if (values !== undefined) {
+		this.rValues = values;
+	}
+	return this.rValues;
 };
 
 DixonRegister.prototype.result95 = function (result95) {

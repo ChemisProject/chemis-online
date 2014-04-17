@@ -1,8 +1,27 @@
-function addValueField() {
+function DixonState() {
+	this.sValues = null;
+	this.sResults = null;
+}
+
+DixonState.prototype.values = function (values) {
+	if (values !== undefined) {
+		this.sValues = values;
+	}
+	return this.sValues;
+};
+
+DixonState.prototype.results = function (results) {
+	if (results !== undefined) {
+		this.sResults = results;
+	}
+	return this.sResults;
+};
+
+function addValueField(value) {
 	$("#chemis-dixon-values-list").append(
 		$('<li />').addClass("pure-control-group").append(
 			$("<div/>").append(
-				$('<input />').addClass("chemis-dixon-value").attr("type", "text").attr("placeholder", "0,000")
+				$('<input />').addClass("chemis-dixon-value").attr("type", "text").attr("placeholder", "0,000").attr("value", value)
 			)
 		).append(
 			$("<div/>").append(
@@ -39,12 +58,10 @@ function clearAllFields() {
 
 function displayResults(dixon, results) {
 	var per = results.percent;
+	console.warn("Percentage: "+per);
 	if (dixon !== null) {
+		console.warn("Não é nulo");
 		$("#result-" + per).html("Aprovado");
-		//$("#le-" + per).html(results.lowerEnd);
-		//$("#ue-" + per).html(results.upperEnd);
-		//$("#n-" + per).html(dixon.getN());
-		//$("#q-" + per).html(dixonConstants[per + "_" + dixon.getN()]);
 		var le = new countUp("le-" + per, 0, results.lowerEnd, 4, 0.5, options);
 		var ue = new countUp("ue-" + per, 0, results.upperEnd, 4, 0.5, options);
 		var n = new countUp("n-" + per, 0, dixon.getN(), 0, 0.5, options);
@@ -62,6 +79,7 @@ function displayResults(dixon, results) {
 			$("#rm-" + per).append($("<li />").text(this));
 		});
 	} else {
+		console.warn("É nulo");
 		$("#result-" + per).html("Reprovado");
 		$("#le-" + per).html("---");
 		$("#ue-" + per).html("---");
@@ -69,14 +87,6 @@ function displayResults(dixon, results) {
 		$("#q-" + per).html("---");
 		$("#rm-" + per).html($("<li />").text("---"));
 	}
-}
-
-//Show selected dixon history register on result panel
-function displayRegister(id){
-	var register=dixonHistory.getRegisterById(id);
-	displayResults(register.rDixon95,register.rResult95);
-	displayResults(register.rDixon99,register.rResult99);
-	$("#chemis-dixon-results").addClass("dixon-history");
 }
 
 function valuesToDixon() {
@@ -96,6 +106,18 @@ function valuesToDixon() {
 	});
 
 	return dixon;
+}
+
+function dixonToValues(dixon) {
+	$("#chemis-dixon-values-list").html("");
+	if (dixon !== undefined) {
+		$.each(dixon.values, function () {
+			addValueField(this);
+		});
+	}
+	while (getAllFields().length < 3) {
+		addValueField();
+	}
 }
 
 function validateField(field, value, index, dixon) {
@@ -119,8 +141,7 @@ function calcDixon() {
 	var dixon95 = valuesToDixon();
 	var dixon99 = valuesToDixon();
 	var register = new DixonRegister("Resultado " + getCurrentDate() + " " + getCurrentTime(), new Date());
-	register.dixon95(dixon95);
-	register.dixon99(dixon99);
+	register.values(valuesToDixon());
 	try {
 		var result95 = DixonControl.calc(dixon95, 95);
 		register.result95(result95); /*salva registro95*/
@@ -138,6 +159,8 @@ function calcDixon() {
 		console.log(err.message);
 		displayResults(null, JSON.parse('{"percent":99}'));
 	}
+	register.dixon95(dixon95);
+	register.dixon99(dixon99);
 	dixonHistory.addRegister(register);
 	addHistoryRegister(register);
 }
@@ -169,6 +192,28 @@ function fieldMoveDown() {
 	}
 }
 
+function getState() {
+	var state = new DixonState();
+	state.values(valuesToDixon());
+	state.results($("#chemis-dixon-results").html());
+	return state;
+}
+
+function restoreState() {
+	dixonToValues(tempState.values());
+	$("#chemis-dixon-results").html(tempState.results());
+	console.log("State restored");
+}
+
+function saveState() {
+	if (tempState !== undefined) {
+		tempState = getState();
+		console.log("State saved");
+	} else {
+		console.log("There's anothe saved state");
+	}
+}
+
 function removeEmptyField() {
 	var active = document.activeElement;
 	if ($(active).val() === "" && getAllFields().length > 3) {
@@ -186,10 +231,37 @@ function removeEmptyField() {
 
 function addHistoryRegister(register) {
 	var list = $("#dixon-history-list");
-	var id="reg-" + register.date().getTime();
-	var item = $("<li />").html($("<a />").attr("id", id).attr("href", "#").attr("title", "Registro").attr("onclick","displayRegister('"+id+"')").text(register.name()));
+	if(dixonHistory.registers.length==1){
+		$(list).html("");
+	}
+	var id = "reg-" + register.date().getTime();
+	var item = $("<li />").html($("<a />").attr("id", id).attr("href", "#").attr("title", "Registro").attr("onclick", "displayRegister('" + id + "')").text(register.name()));
 	$(list).append($(item));
 	console.log("Registro adicionado");
+}
+
+//Show selected dixon history register on result panel
+function displayRegister(id) {
+	saveState();
+	var register = dixonHistory.getRegisterById(id);
+	dixonToValues(register.values());
+	
+	try{
+		displayResults(register.rDixon95, register.rResult95);
+		console.log("Foi 95?");
+	}catch(err){
+		console.log(err.message);
+		displayResults(null, JSON.parse('{"percent":95}'));
+	}
+
+	try{
+		displayResults(register.rDixon99, register.rResult99);
+		console.log("Foi 99?");
+	}catch(err){
+		console.log(err.message);
+		displayResults(null, JSON.parse('{"percent":99}'));
+	}
+	$("#chemis-page").addClass("history-mode");
 }
 
 var options = {  
@@ -201,4 +273,6 @@ var options = {  
 
 var dixonHistory = new DixonHistory();
 var tempRegister = null;
+var tempState = null;
+
 clearAllFields();

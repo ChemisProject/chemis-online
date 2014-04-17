@@ -71,12 +71,5 @@
       color: white; }
     #dixon-history-list li a:hover {
       text-decoration: underline; }
-
-.dixon-history {
-  background: #1f1f1f;
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out; }
-  .dixon-history div {
-    color: white; }
+    #dixon-history-list li h3 {
+      color: #cccccc; }

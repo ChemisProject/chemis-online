@@ -75,7 +75,14 @@ ul {
   width: 100%;
   overflow-x: none;
   overflow-y: auto;
-  display: block; }
+  display: block;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out; }
+  @media all and (max-width: 767px) {
+    #chemis-page {
+      bottom: 3em; } }
 
 #chemis-header {
   font-family: Colaborate-Light, DejaVu, sans-serif;
