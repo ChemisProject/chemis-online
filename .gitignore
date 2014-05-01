@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.class
 
 # Package Files #
@@ -6,3 +7,7 @@
 *.ear
 /build/
 /dist/
+=======
+/nbproject/private/
+*.php~
+>>>>>>> 7eb9d711c7307aa5120a7fdc15cd118ee2437e32
