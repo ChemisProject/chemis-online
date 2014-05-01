@@ -1,0 +1,304 @@
+@CHARSET "UTF-8";
+
+@font-face {
+	font-family: 'Colaborate-Thin';
+	src: url('Colaborate/ColabThi.eot');
+	src: url('Colaborate/ColabThi.woff') format('woff'), url('Colaborate/ColabThi.ttf') format('truetype'), url('Colaborate/ColabThi.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Colaborate-Light';
+	src: url('Colaborate/ColabLig.eot');
+	src: url('Colaborate/ColabLig.woff') format('woff'), url('Colaborate/ColabLig.ttf') format('truetype'), url('Colaborate/ColabLig.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Colaborate-Regular';
+	src: url('Colaborate/ColabReg.eot');
+	src: url('Colaborate/ColabReg.woff') format('woff'), url('Colaborate/ColabReg.ttf') format('truetype'), url('Colaborate/ColabReg.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Colaborate-Bold';
+	src: url('Colaborate/ColabBol.eot');
+	src: url('Colaborate/ColabBol.woff') format('woff'), url('Colaborate/ColabBol.ttf') format('truetype'), url('Colaborate/ColabBol.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Colaborate-Medium';
+	src: url('Colaborate/ColabMed.eot');
+	src: url('Colaborate/ColabMed.woff') format('woff'), url('Colaborate/ColabMed.ttf') format('truetype'), url('Colaborate/ColabMed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html, body{
+	margin: 0;
+	padding: 0;
+	background-color: #f5f5f5;
+}
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: Colaborate-Thin, DejaVu, sans-serif;
+}
+
+h2{
+	color: #787878;
+}
+
+.pure-form input{
+    border-radius: 0!important;
+    box-shadow: none!important;
+    background-image: none!important;
+    font-size: 0.9em!important;
+    padding-top: 0.7em!important;
+    padding-bottom: 0.7em!important;
+}
+
+.pure-form input:focus{
+    border: 1px solid #7e0080!important;
+}
+
+
+.pure-form-aligned .pure-control-group label{
+	width: 3em;
+}
+
+.pure-button{    
+    font-size: 0.9em!important;
+    padding-top: 0.7em!important;
+    padding-bottom: 0.7em!important;
+    background-image: none!important;
+    border-radius: 0!important;
+	background-color: #A379A3;
+	color: white;
+	font-size: 0.8em;
+}
+
+.chemis-green-button{
+    background-color: #66a268;
+	color: white;
+}
+
+.chemis-blue-button{
+    background-color: #667fa2;
+	color: white;
+}
+
+.chemis-red-button{
+    background-color: #a2666a;
+	color: white;
+}
+/*.pure-button:hover{
+	background-color: #BE8EBF;
+}
+
+.pure-:active{
+	background-color: #E5AAE6;
+}*/
+
+
+/*chemis*/
+#chemis-page{
+	left: 0;
+    margin: 0;
+}
+
+.chemis-header{
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	: 0.5em;
+}
+
+.chemis-menu-container {
+    width: 100%;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    position: relative;
+    background-color:
+    /*#A379A3*/
+    #563D7C;
+    z-index: 10;
+    top: 0;
+    height: 2.4em;
+}
+.chemis-tool-bar {
+    border-bottom: 1px groove lightgray;
+    background: none!important;
+}
+.chemis-tool-bar li {
+    margin-left: 0!important;
+    text-align: center;
+}
+.chemis-tool-bar li a {
+    color: white!important;
+    border-radius: 0.2em;
+    text-decoration: none;
+}
+.chemis-tool-bar li a:hover {
+    color: #464646!important;
+    background: #F5F5F5!important;
+}
+.chemis-tool-bar li a:active,
+.chemis-tool-bar .pure-menu-selected a {
+    color: #464646!important;
+    background: #F5F5F5!important;
+}
+.chemis-tool-bar a:focus{
+    background: none!important;
+}
+.chemis-tool-bar li a img,
+.chemis-tool-bar li a span,
+{
+    vertical-align: middle;
+}
+
+.chemis-tool-bar li a span {
+    margin-left: 0.2em;
+}
+.chemis-logo {
+    float: left;
+    height: 2.4em;
+    margin-right: 1em;
+    margin-left: 0.5em;
+}
+.chemis-logo img {
+    height: 2.1em;
+}
+.chemis-menu{
+    float: left;
+    height: 2.4em;
+    margin-left: 0.5em;
+}
+.chemis-login-link {
+    float: right;
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.chemis-panel{
+	padding: 0em;
+}
+
+#chemis-menu-bar{
+    position: static;
+	position: fixed;
+	width: 15em;
+	bottom: 0;
+	top: 3em;
+	background-color: #1f1f1f;
+    z-index: 9;
+    border-right: 1px #707070 solid;
+}
+
+.chemis-menu-bar-top{
+	float: top;
+    border-right: 1px solid #464646;
+}
+
+#chemis-vertical-menu{
+	height: 100%;
+	list-style: none;
+	margin: 0;
+    border: none;
+    background: none;
+}
+
+#chemis-vertical-menu li a{
+    padding: 0!important;
+}
+
+#chemis-vertical-menu li{
+    color: #fff!important;
+	width: 100%!important;
+	margin-bottom: 0.1em!important;
+}
+
+#chemis-vertical-menu li a{
+    padding: 0!important;
+    color: white!important;
+}
+
+#chemis-vertical-menu li a:focus{
+    color: #464646!important;
+}
+
+#chemis-vertical-menu li a:hover span{
+    color: #464646;
+}
+
+#chemis-vertical-menu li img,
+#chemis-vertical-menu li span{
+    vertical-align: middle;
+    text-align: center;
+}
+
+#chemis-vertical-menu li a img{
+    height: 2.4em!important;
+}
+
+#chemis-vertical-menu li a span{
+    margin-left: 0.5em;
+    font-family: Colaborate-Light, DejaVu, sans-serif;
+}
+
+#chemis-item-settings a img{
+    background-color: #ca3333;
+}
+
+#chemis-item-dixon a img{
+    background-color: #43CA33;
+}
+#chemis-item-help a img{
+    background-color: #33CAC2;
+    bottom: 0;
+}
+
+.chemis-dixon-panel{
+	padding-left: 2em;
+    padding-right: 2em;
+    display: block;
+    position: relative;
+}
+
+.chemis-button-group{
+    background-color: #A379A3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: static;
+    position: fixed;
+}
+
+#chemis-menu-mask{
+    left: 0;
+    top: 0;
+    z-index: -1;
+    position: static;
+    position: fixed;
+    width: 100%!important;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-out;
+}
+
+.chemis-menu-mask-open{
+    z-index: 8!important;
+    display: inherit!important;
+    opacity: 0.7!important;    
+}

@@ -1,0 +1,88 @@
+/* Copyright 2013-2014 ChemisProject
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+@CHARSET "UTF-8";
+#chemis-dixon-values {
+  height: 100% !important; }
+
+#chemis-dixon-values-list {
+  height: 100% !important;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden; }
+  #chemis-dixon-values-list li {
+    display: table !important;
+    width: 100% !important; }
+    #chemis-dixon-values-list li div {
+      width: 100% !important;
+      display: table-cell !important;
+      text-wrap: none !important;
+      overflow: hidden !important; }
+    #chemis-dixon-values-list li button {
+      vertical-align: top !important;
+      height: 2.8em !important; }
+
+.chemis-dixon-value, .chemis-dixon-value-rem {
+  display: table-cell !important;
+  width: 100% !important;
+  height: 2.8em !important;
+  vertical-align: top !important; }
+
+.chemis-dixon-value-removed {
+  border: 1px solid #ca3333;
+  transition: 0.1s border; }
+
+.chemis-dixon-value-invalid {
+  color: #ca3333;
+  transition: 0.1s color; }
+
+#chemis-dixon-results {
+  display: inline-block;
+  height: 100%; }
+
+.chemis-dixon-result-label {
+  text-indent: 1em; }
+
+.chemis-dixon-result-label-group {
+  display: block; }
+  .chemis-dixon-result-label-group > * {
+    display: inline-block; }
+  .chemis-dixon-result-label-group > div:nth-of-type(2) {
+    font-size: 1.3em; }
+
+#rm-95, #rm-99 {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+#dixon-history-list {
+  list-style: none;
+  padding: 0; }
+  #dixon-history-list li {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align: center; }
+    #dixon-history-list li a {
+      width: 100%;
+      height: 100%;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      text-decoration: none;
+      display: block;
+      white-space: normal;
+      background-color: #a379a3;
+      color: white; }
+    #dixon-history-list li a:hover {
+      text-decoration: underline; }
+    #dixon-history-list li h3 {
+      color: #cccccc; }
