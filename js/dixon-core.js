@@ -1,4 +1,18 @@
-var dixonConstants = new Array();
+/*
+	Copyright 2013-2014 ChemisProject
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.*/
+var dixonConstants = [];
 dixonConstants['95_3'] = 0.970;
 dixonConstants['95_3'] = 0.970;
 dixonConstants['95_4'] = 0.829;
@@ -67,8 +81,8 @@ dixonConstants['99_30'] = 0.483;
 Class model
 */
 function Dixon() {
-	this.values = new Array();
-	this.removed = new Array();
+	this.values =[];
+	this.removed =[];
 	console.log("Dixon Object initialized");
 }
 
@@ -275,7 +289,7 @@ DixonRegister.prototype.dixon99 = function (dixon99) {
 Class History
 */
 function DixonHistory() {
-	this.registers=new Array();
+	this.registers=[];
 	console.log("Dixon History initialized!");
 }
 

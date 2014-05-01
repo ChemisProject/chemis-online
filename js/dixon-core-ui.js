@@ -1,3 +1,17 @@
+/*
+	Copyright 2013-2014 ChemisProject
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.*/
 function DixonState() {
 	this.sValues = null;
 	this.sResults = null;
@@ -21,7 +35,7 @@ function addValueField(value) {
 	$("#chemis-dixon-values-list").append(
 		$('<li />').addClass("pure-control-group").append(
 			$("<div/>").append(
-				$('<input />').addClass("chemis-dixon-value").attr("type", "text").attr("placeholder", "0,000").attr("value", value)
+				$('<input />').addClass("chemis-dixon-value").attr("type", "tel").attr("placeholder", "0,000").attr("value", value)
 			)
 		).append(
 			$("<div/>").append(
@@ -58,9 +72,7 @@ function clearAllFields() {
 
 function displayResults(dixon, results) {
 	var per = results.percent;
-	console.warn("Percentage: "+per);
 	if (dixon !== null) {
-		console.warn("Não é nulo");
 		$("#result-" + per).html("Aprovado");
 		var le = new countUp("le-" + per, 0, results.lowerEnd, 4, 0.5, options);
 		var ue = new countUp("ue-" + per, 0, results.upperEnd, 4, 0.5, options);
@@ -79,7 +91,6 @@ function displayResults(dixon, results) {
 			$("#rm-" + per).append($("<li />").text(this));
 		});
 	} else {
-		console.warn("É nulo");
 		$("#result-" + per).html("Reprovado");
 		$("#le-" + per).html("---");
 		$("#ue-" + per).html("---");
@@ -148,6 +159,9 @@ function calcDixon() {
 		displayResults(dixon95, result95);
 	} catch (err) {
 		console.log(err.message);
+		if(err.name=="Chemis Dixon Exception"){
+			showAlert("Teste reprovado - 'N' é menor que 3");
+		}
 		displayResults(null, JSON.parse('{"percent":95}'));
 	}
 
@@ -157,6 +171,9 @@ function calcDixon() {
 		displayResults(dixon99, result99);
 	} catch (err) {
 		console.log(err.message);
+		if(err.name=="Chemis Dixon Exception"){
+			showAlert("Teste reprovado - 'N' é menor que 3");
+		}
 		displayResults(null, JSON.parse('{"percent":99}'));
 	}
 	register.dixon95(dixon95);
@@ -171,7 +188,6 @@ function fieldMoveUp() {
 		var index = allFields.index(document.activeElement);
 		if (index != -1 && index !== 0) {
 			allFields[index - 1].focus();
-			console.log("Move up");
 		} else if (index === 0) {
 			getAllFields()[0].focus();
 		}
@@ -184,7 +200,6 @@ function fieldMoveDown() {
 		var index = allFields.index(document.activeElement);
 		if (index != -1 && index != allFields.length - 1) {
 			allFields[index + 1].focus();
-			console.log("Move down");
 		} else if (index == allFields.length - 1) {
 			addValueField();
 			getAllFields()[index + 1].focus();
@@ -210,7 +225,7 @@ function saveState() {
 		tempState = getState();
 		console.log("State saved");
 	} else {
-		console.log("There's anothe saved state");
+		console.log("There's another saved state");
 	}
 }
 
@@ -243,12 +258,12 @@ function addHistoryRegister(register) {
 //Show selected dixon history register on result panel
 function displayRegister(id) {
 	saveState();
+	showDialog();
 	var register = dixonHistory.getRegisterById(id);
 	dixonToValues(register.values());
 	
 	try{
 		displayResults(register.rDixon95, register.rResult95);
-		console.log("Foi 95?");
 	}catch(err){
 		console.log(err.message);
 		displayResults(null, JSON.parse('{"percent":95}'));
@@ -256,12 +271,28 @@ function displayRegister(id) {
 
 	try{
 		displayResults(register.rDixon99, register.rResult99);
-		console.log("Foi 99?");
 	}catch(err){
 		console.log(err.message);
 		displayResults(null, JSON.parse('{"percent":99}'));
 	}
 	$("#chemis-page").addClass("history-mode");
+}
+
+function dialogCancel(){
+	restoreState();
+	closeDialog();
+}
+
+function dialogUse(){
+	closeDialog();
+}
+
+function showDialog(){
+	$("#dixon-history-dialog").addClass("open");
+}
+
+function closeDialog(){
+	$("#dixon-history-dialog").removeClass("open");
 }
 
 var options = {  

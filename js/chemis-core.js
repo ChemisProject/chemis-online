@@ -1,3 +1,17 @@
+/*
+	Copyright 2013-2014 ChemisProject
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.*/
 document.onkeydown = dixonEvents;
 
 function dixonEvents(e) {
@@ -79,4 +93,38 @@ function formatDate(date){
 
 function daysInMonth(month,year) {
     return new Date(year, month, 0).getDate();
+}
+
+//chemis alert message
+var alertQueue=[];
+
+function showAlert(text){
+	alertQueue.push(text);
+	if(($("#chemis-alert.open")).length===0){
+		$("#chemis-alert").addClass("open");
+		shiftQueue();
+	}
+}
+
+function setAlertMessage(text){
+	setTimeout(function(){
+		$("#chemis-alert-text").text(text);
+		$("#chemis-alert-text").removeClass("fade-out");
+	},300);
+}
+
+function shiftQueue(){
+	if(alertQueue.length>0){
+		setAlertMessage(alertQueue.shift());
+		setTimeout(function(){
+			$("#chemis-alert-text").addClass("fade-out");
+			shiftQueue();
+		},4000);
+	}else{
+		closeAlert();
+	}
+}
+
+function closeAlert(){
+	$("#chemis-alert").removeClass("open");
 }
