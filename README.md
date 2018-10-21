@@ -1,7 +1,7 @@
-<img width="100" src="https://s3.amazonaws.com/chemis/chemis-logo-no-bg.png"><br>
-Chemis Webapp
-=============
+# Chemis Q Calc (web app)
 
-This is the Chemis webapp version os Chemis. Its production version can be accessed at http://online.chemis.org/<br>
+A Q Test calculator web app
 
-If you have any questions or suggestions, contact us at chemisproject@googlegroups.com
+## Getting Started
+
+You can use the latest version of Chemis Q Calc at http://online.chemis.org/
