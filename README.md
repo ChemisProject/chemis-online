@@ -1,6 +1,6 @@
-# Chemis Q Calc (web app)
+# Chemis Q Calc (app)
 
-A Q Test calculator web app
+A Q Test calculator app
 
 ## Getting Started
 
